@@ -1,0 +1,37 @@
+# Estudo sobre Orientação a Objetos
+
+```bash
+docker-compose up -d
+
+docker-compose run app
+```
+
+22/03/2022
+
+Disponibilizar a aplicação na Web - HTML - Sem framework, sem CSS
+
+Transportar de CLI para versão WEB
+
+Página de listagem, com os produtos - GET /products
+
+Cada produto tem 1 link para - /cart/PRODUCT_ID
+
+Lista de quantidade no cart e clicar em ADD no CART
+
+Adicionado no carrinho, redirecionar para a listagem
+
+Na listagem, botão de fechar a compra para /checkout
+
+Em /checkout, link para /sucesso
+
+Página /sucesso irá exibir mensagem final
+
+Usar sessão com cookie para guardar o carrinho
+
+Desafio é reusar o que já está disponível
+
+python http.py - rodar servidor web
+
+Continuar usando a base de administração de produtos
+
+Interface web - funções, requisições HTTP
