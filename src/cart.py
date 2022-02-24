@@ -21,15 +21,13 @@ class Purchase:
 
     @staticmethod
     def purchase_result(purchase: str):
-        if purchase == "n":
-            outputs.CartPurchase.your_purchase()
+        if purchase == "n": 
             for index, itens in enumerate(Cart.cart_item):
                 item = Cart.cart_item[index]
                 Purchase.__total_purchase = item["subtotal_price"] + Purchase.__total_purchase
                 file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])
-                outputs.CartPurchase.purchase_details(
-                    item["name"], item["amount"], item["price"], item["subtotal_price"]
-                )
+                print('teste_pur2')
+                return item["name"], item["amount"], item["price"], item["subtotal_price"]
             outputs.CartPurchase.total_purchase(Purchase.__total_purchase)
             exit(0)
         elif purchase == "s":

@@ -12,8 +12,8 @@ class ProductsList:
         for product in list:
             name: str = list[product]["name"]
             price: float = list[product]["price"]
-            list_products += "%s - %s R$ %.2f\n" % (product, name, price)
-        return print(list_products)
+            list_products += "<a href=\"cart\%s\">%s - %s $ %.2f</a><br>" % (product, product, name, price)
+        return list_products
 
 
 class SelectedProduct:

@@ -1,74 +1,66 @@
 class Header:
     @staticmethod
     def header() -> None:
-        return print("################## Full Cycle Store ################## \n")
+        return "################## Full Cycle Store ################## \n"
 
 
 class List:
     @staticmethod
     def list() -> None:
-        return print("Lista de produtos da loja \n")
+        return "Store\'s Products List \n"
 
 
 class InputsQuestions:
     @staticmethod
     def which_product():
-        return "\nQual produto você gostaria de comprar?\n"
+        return "\Which product would you like to buy?\n"
 
     @staticmethod
     def which_amount():
-        return "Qual a quantidade deste produto deseja comprar? \n"
+        return "Which amount would you like to get? \n"
 
     @staticmethod
     def keep_purchase():
         return (
-            "Você deseja continuar suas compras? Digite 's' para sim ou 'n' para não \n"
+            "Do you want to keep the purchase? Select 's' to Yes or 'n' to No \n"
         )
 
 
 class CartPurchase:
     @staticmethod
     def your_purchase():
-        return print(
-            "Esta é a sua compra. Obrigado por comprar com a Full Cycle Store!\n"
-        )
+        return "This is your purchase. Thanks for buying at Full Cycle Store!\n"
 
     @staticmethod
     def purchase_details(name, amount, price, subtotal):
-        return print(
-            "     Item: %s, quantidade %.0f, valor unitário %.2f, subtotal %.2f"
-            % (name, amount, price, subtotal)
-        )
+        return "     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f" % (name, amount, price, subtotal)
+        
 
     @staticmethod
     def total_purchase(total):
-        return print("\nO valor total da compra: %.2f" % (total))
+        return "\nThis is the total of your purchase: %.2f" % (total)
 
     @staticmethod
     def keep_purchase():
-        return print("Selecione o produto conforme a lista abaixo")
+        return "Select the product according to the list bellow"
 
 
 class InputsWarnings:
     @staticmethod
     def input_product():
         from products import ProductsList
-
-        return print(
-            "Por favor, escolha o produto entre 1 e %s"
-            % str(len(ProductsList.products))
-        )
+        return "Please, select the product between 1 and %s" % str(len(ProductsList.products))
 
     @staticmethod
     def input_amount():
-        return print("Por favor, escolha uma quantidade até 9 itens")
+        return "Max purchase of 9 itens. Please, select a lower quantity"
 
     @staticmethod
     def input_keep():
-        return print("Por favor, digite s para sim e n para não")
+        return "PLease, type s to Yes or n to No"
 
 
 class InventoryCheck:
     @staticmethod
     def inventory_not_available():
-        print("Não temos estoque suficiente para este produto.")
+        "There is not enough itens available for this product."
