@@ -1,9 +1,11 @@
+from urllib.parse import parse_qs, urlparse
 from products import ProductsList, SelectedProduct
 from inputs import Inputs
 from cart import Cart, Purchase
 import file
 import outputs
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
 
 
 HOST = "0.0.0.0"
@@ -13,34 +15,38 @@ file.File.load_product_data()
 class Server(BaseHTTPRequestHandler):
     
     def do_GET(self):
+        ID = self.path[-1]
+        
         if self.path == '/':
-
             self.send_response(200)
             self.send_header("Context-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes(('<html><body>' + outputs.Header.header() + '<br>' + outputs.List.list() \
-                + '<br>' + ProductsList.products_list(ProductsList.products)+ '</html></body>'), "utf-8"))
-        if self.path == '/cart/1':
-            Cart.cart(1, 1, ProductsList.products)
-            result = SelectedProduct.selected_product(ProductsList.products, 1, 1)
-            # print(ProductsList.products)
-            # print(result)
-            Purchase.purchase_result('n')
+            html = '<html><body>' + outputs.Header.header() + '<br>' + outputs.List.list() \
+                + '<br>' + ProductsList.products_list(ProductsList.products)+ '</html></body>'
+            self.wfile.write(bytes(html, "utf-8"))
+        
+        if self.path == ('/cart/' + ID):
+            Cart.cart(int(ID), 1, ProductsList.products)
             self.send_response(200)
             self.send_header("Context-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes(
-                '<html><body>' + outputs.Header.header() + '<br>' + 
-                outputs.CartPurchase.purchase_details(result["name"], result["amount"], 
-                    result["price"], result["subtotal_price"])  + 
-                    '<br><input type="button" value="Keep buying!" onclick="history.back()"><br>\
-                    <form action="http://localhost:8000/checkout/"><input type="submit" value="Checkout!">\
-                        </form></body></html>', "utf-8"))
+            html = '<html><body>' + outputs.Header.header() + '<br>' + \
+                Purchase.purchase_result() + \
+                '<br><input type="button" value="Keep buying!" onclick="history.back()"><br>\
+                <form action="http://localhost:8000/checkout/"><input type="submit" value="Checkout!">\
+                </form></body></html>'
+            self.wfile.write(bytes(html, "utf-8"))
+        
         if self.path == '/checkout/?':
             self.send_response(200)
             self.send_header("Context-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes(('<html><body>' + outputs.Header.header() + '<br>' + outputs.CartPurchase.total_purchase(Purchase._Purchase__total_purchase) + '</body></html>'), "utf-8"))
+            html = '<html><body>' + outputs.Header.header() + '<br>' + \
+                outputs.CartPurchase.total_purchase(Purchase._total_purchase) + \
+                '</body></html>'
+            self.wfile.write(bytes(html, "utf-8"))
+        
+
 
 # def main():
 

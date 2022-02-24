@@ -6,6 +6,7 @@ import outputs
 class Cart:
 
     cart_item: list = []
+    
 
     @staticmethod
     def cart(product: int, amount: int, products_list: dict):
@@ -17,18 +18,23 @@ class Cart:
 
 class Purchase:
 
-    __total_purchase: float = 0
+    _total_purchase: float = 0
+
+    
 
     @staticmethod
-    def purchase_result(purchase: str):
-        if purchase == "n": 
-            for index, itens in enumerate(Cart.cart_item):
-                item = Cart.cart_item[index]
-                Purchase.__total_purchase = item["subtotal_price"] + Purchase.__total_purchase
-                file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])
-                print('teste_pur2')
-                return item["name"], item["amount"], item["price"], item["subtotal_price"]
-            outputs.CartPurchase.total_purchase(Purchase.__total_purchase)
-            exit(0)
-        elif purchase == "s":
-            outputs.CartPurchase.keep_purchase()
+    def purchase_result():
+        result = ''
+        for index, itens in enumerate(Cart.cart_item):
+            item = Cart.cart_item[index]
+            Purchase._total_purchase += item["subtotal_price"]
+            file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])
+            print(Purchase._total_purchase)
+            result += outputs.CartPurchase.purchase_details(
+                item["name"], item["amount"], item["price"], item["subtotal_price"]
+            )
+        return result
+            
+            # outputs.CartPurchase.total_purchase(Purchase.__total_purchase)
+        # elif purchase == "s":
+        #     outputs.CartPurchase.keep_purchase()

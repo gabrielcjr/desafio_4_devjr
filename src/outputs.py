@@ -33,7 +33,7 @@ class CartPurchase:
 
     @staticmethod
     def purchase_details(name, amount, price, subtotal):
-        return "     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f" % (name, amount, price, subtotal)
+        return "     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (name, amount, price, subtotal)
         
 
     @staticmethod
