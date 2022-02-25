@@ -1,32 +1,17 @@
 class Header:
     @staticmethod
-    def header() -> None:
+    def header() -> str:
         return "################## Full Cycle Store ################## \n"
 
 
 class List:
     @staticmethod
-    def list() -> None:
+    def list() -> str:
         return "Store\'s Products List \n"
 
 
-class InputsQuestions:
-    @staticmethod
-    def which_product():
-        return "\Which product would you like to buy?\n"
-
-    @staticmethod
-    def which_amount():
-        return "Which amount would you like to get? \n"
-
-    @staticmethod
-    def keep_purchase():
-        return (
-            "Do you want to keep the purchase? Select 's' to Yes or 'n' to No \n"
-        )
-
-
 class CartPurchase:
+
     @staticmethod
     def your_purchase():
         return "This is your purchase. Thanks for buying at Full Cycle Store!\n"
@@ -34,7 +19,6 @@ class CartPurchase:
     @staticmethod
     def purchase_details(name, amount, price, subtotal):
         return "     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (name, amount, price, subtotal)
-        
 
     @staticmethod
     def total_purchase(total):
