@@ -6,6 +6,19 @@ docker-compose up -d
 docker-compose run app
 ```
 
+Acesse o link
+
+```
+http://localhost:8080
+```
+
+Clique no item que desejar.
+
+Clique em Checkout! para finalizar a compra ou em Keep buying! para retornar a tela inicial e escolher mais opções.
+
+Na tela seguinte ao do carrinho, você terá o valor total da compra. Clicando em Purchase!, a compra será finalizada.
+
+
 22/03/2022
 
 Disponibilizar a aplicação na Web - HTML - Sem framework, sem CSS
