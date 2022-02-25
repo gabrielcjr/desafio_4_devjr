@@ -1,50 +1,73 @@
+from random import randint
+
 class Header:
     @staticmethod
     def header() -> str:
-        return "################## Full Cycle Store ################## \n"
+        return "<br>################## Full Cycle Store ################## <br>"
 
 
 class List:
     @staticmethod
     def list() -> str:
-        return "Store\'s Products List \n"
+        return "<br>Store\'s Products List <br><br> Select bellow a product of your choice<br>"
+    
+    @staticmethod
+    def list_products() -> str:
+        from products import ProductsList
+        html = '<html><body>' + Header.header() + '<br>' + List.list() + '<br>' + \
+            ProductsList.products_list(ProductsList.products) + '</html></body>'
+        return html
 
 
 class CartPurchase:
 
     @staticmethod
     def your_purchase():
-        return "This is your purchase. Thanks for buying at Full Cycle Store!\n"
+        return "<br>This is your purchase. Thanks for buying at Full Cycle Store!<br>"
 
     @staticmethod
     def purchase_details(name, amount, price, subtotal):
-        return "     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (name, amount, price, subtotal)
+        return "<br>     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (name, amount, price, subtotal)
 
     @staticmethod
     def total_purchase(total):
-        return "\nThis is the total of your purchase: %.2f" % (total)
+        return "<br>This is the total of your purchase: %.2f <br>" % (total)
 
     @staticmethod
     def keep_purchase():
-        return "Select the product according to the list bellow"
-
-
-class InputsWarnings:
+        return "<br>Select the product according to the list bellow <br>"
+    
     @staticmethod
-    def input_product():
-        from products import ProductsList
-        return "Please, select the product between 1 and %s" % str(len(ProductsList.products))
+    def current_cart():
+        from cart import Purchase
+        html = '<html><body>' + Header.header() + '<br>' + \
+                Purchase.purchase_result() + \
+                '<br><input type="button" value="Keep buying!" onclick="history.back()"><br>\
+                <form action="http://localhost:8080/checkout/"><input type="submit" value="Checkout!">\
+                </form></body></html>'
+        return html
 
-    @staticmethod
-    def input_amount():
-        return "Max purchase of 9 itens. Please, select a lower quantity"
 
-    @staticmethod
-    def input_keep():
-        return "PLease, type s to Yes or n to No"
+class Checkout:
 
+    def checkout():
+        from cart import Purchase
+        html = '<html><body>' + Header.header() + '<br>' + \
+                CartPurchase.total_purchase(Purchase._total_purchase) + \
+                '<form action="http://localhost:8080/success/"><input type="submit" value="Purchase!">\
+                </body></html>'
+        return html
+
+
+class Success:
+
+    def success_msg():
+        html = '<html><body>' + Header.header() + '<br>' + \
+                'Congratulations! Your order number ' + str(randint(8000, 10000)) + ' has been placed successfully \
+                </body></html>'
+        return html
 
 class InventoryCheck:
     @staticmethod
     def inventory_not_available():
-        "There is not enough itens available for this product."
+        "<br>There is not enough itens available for this product.<br>"
