@@ -15,7 +15,9 @@ class List:
     def list_products() -> str:
         from products import ProductsList
         html = '<html><body>' + Header.header() + '<br>' + List.list() + '<br>' + \
-            ProductsList.products_list(ProductsList.products) + '</html></body>'
+            ProductsList.products_list(ProductsList.products) + '<br>\
+                <a href="http://localhost:8080/cart/">Cart</a>\
+                    </body></html>'
         return html
 
 
@@ -42,9 +44,9 @@ class CartPurchase:
         from cart import Purchase
         html = '<html><body>' + Header.header() + '<br>' + \
                 Purchase.purchase_result() + \
-                '<br><input type="button" value="Keep buying!" onclick="history.back()"><br>\
-                <form action="http://localhost:8080/checkout/"><input type="submit" value="Checkout!">\
-                </form></body></html>'
+                '<br><a href="http://localhost:8080/">Go back<a/><br>\
+                <a href="http://localhost:8080/checkout/">Checkout</a>\
+                </a></body></html>'
         return html
 
 
@@ -54,7 +56,7 @@ class Checkout:
         from cart import Purchase
         html = '<html><body>' + Header.header() + '<br>' + \
                 CartPurchase.total_purchase(Purchase._total_purchase) + \
-                '<form action="http://localhost:8080/success/"><input type="submit" value="Purchase!">\
+                '<a href="http://localhost:8080/success/">Purchase</a>\
                 </body></html>'
         return html
 
