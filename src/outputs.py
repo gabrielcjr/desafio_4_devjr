@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Header:
     @staticmethod
     def header() -> str:
@@ -10,11 +11,11 @@ class List:
     @staticmethod
     def list() -> str:
         return "<br>Store\'s Products List <br><br> Select bellow a product of your choice<br>"
-    
+
     @staticmethod
     def list_products() -> str:
         from products import ProductsList
-        html = '<html><body>' + Header.header() + '<br>' + List.list() + '<br>' + \
+        html: str = '<html><body>' + Header.header() + '<br>' + List.list() + '<br>' + \
             ProductsList.products_list(ProductsList.products) + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\
                     </body></html>'
@@ -38,36 +39,38 @@ class CartPurchase:
     @staticmethod
     def keep_purchase():
         return "<br>Select the product according to the list bellow <br>"
-    
+
     @staticmethod
     def current_cart():
         from cart import Purchase
-        html = '<html><body>' + Header.header() + '<br>' + \
-                Purchase.purchase_result() + \
-                '<br><a href="http://localhost:8080/">Go back<a/><br>\
-                <a href="http://localhost:8080/checkout/">Checkout</a>\
-                </a></body></html>'
+        html = '<html><body>' + Header.header() + '<br>' + Purchase.purchase_result() + \
+            '<br><a href="http://localhost:8080/">Go back<a/><br> \
+            <a href="http://localhost:8080/checkout/">Checkout</a> \
+            </a></body></html>'
         return html
 
 
 class Checkout:
 
+    @staticmethod
     def checkout():
         from cart import Purchase
         html = '<html><body>' + Header.header() + '<br>' + \
-                CartPurchase.total_purchase(Purchase._total_purchase) + \
-                '<a href="http://localhost:8080/success/">Purchase</a>\
-                </body></html>'
+            CartPurchase.total_purchase(Purchase._total_purchase) + \
+            '<a href="http://localhost:8080/success/">Purchase</a>\
+            </body></html>'
         return html
 
 
 class Success:
 
+    @staticmethod
     def success_msg():
         html = '<html><body>' + Header.header() + '<br>' + \
-                'Congratulations! Your order number ' + str(randint(8000, 10000)) + ' has been placed successfully \
-                </body></html>'
+            'Congratulations! Your order number ' + str(randint(8000, 10000)) + ' has been placed successfully \
+            </body></html>'
         return html
+
 
 class InventoryCheck:
     @staticmethod
