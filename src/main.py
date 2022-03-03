@@ -1,4 +1,3 @@
-from operator import index
 from products import ProductsList
 from cart import Cart, Purchase
 import file
@@ -33,23 +32,25 @@ class Server(BaseHTTPRequestHandler):
             self.send_header("Context-type", "text/html")
             self.send_header("Set-Cookie", C.OutputString())
             self.end_headers()
+
+        def __create_cookie():
+            return ''.join(str(item["product"]) + "," for item in Cart.cart_item)
         
         def __get_cookies():
             get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
-            get_cart_items = get_cookie["item"].value
-            last_comma_removed = get_cart_items[:-1]
-            cart_items = last_comma_removed.split(",")
-            return cart_items
+            cart_items_raw = get_cookie["item"].value
+            return __remove_last_comma(cart_items_raw).split(",")
+        
+        def __remove_last_comma(value):
+            return value[:-1]
 
         if self.path == '/':
             __response_header()
             self.wfile.write(bytes(outputs.List.list_products(), "utf-8"))
 
         if self.path == ('/cart/' + ID):
-            cart_items_cookie = ''
             Cart.cart(int(ID), 1, ProductsList.products)
-            for item in Cart.cart_item:
-                cart_items_cookie += str(item["product"]) + ","
+            cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
 
@@ -57,7 +58,6 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == ('/cart/'):
             __response_header()
-
             if Cart.cart_item:
                 self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
             else:
@@ -68,15 +68,13 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == '/checkout/':
             Purchase.calculate_total()
-
             __response_header()
             self.wfile.write(bytes(outputs.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
-            C.set("item", "", "")
             Purchase.adjust_inventory()
-            __response_header_with_cookie()
+            __response_header()
             Purchase._total_purchase = 0
             Cart.cart_item = []
             self.wfile.write(bytes(outputs.Success.success_msg(), "utf-8"))
