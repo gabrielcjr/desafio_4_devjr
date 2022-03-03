@@ -4,7 +4,7 @@ from cart import Cart, Purchase
 import file
 import outputs
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from http import cookies, cookiejar
+from http import cookies
 from random import seed
 
 HOST = "0.0.0.0"
@@ -28,38 +28,55 @@ class Server(BaseHTTPRequestHandler):
             self.send_header("Context-type", "text/html")
             self.end_headers()
 
+        def __response_header_with_cookie():
+            self.send_response(200)
+            self.send_header("Context-type", "text/html")
+            self.send_header("Set-Cookie", C.OutputString())
+            self.end_headers()
+        
+        def __get_cookies():
+            get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
+            get_cart_items = get_cookie["item"].value
+            last_comma_removed = get_cart_items[:-1]
+            cart_items = last_comma_removed.split(",")
+            return cart_items
+
         if self.path == '/':
             __response_header()
             self.wfile.write(bytes(outputs.List.list_products(), "utf-8"))
 
         if self.path == ('/cart/' + ID):
-            cart_items = []
+            cart_items_cookie = ''
             Cart.cart(int(ID), 1, ProductsList.products)
             for item in Cart.cart_item:
-                cart_items.append(item["product"])
-            C.set("item", cart_items, cart_items)
-            self.send_response(200)
-            self.send_header("Context-type", "text/html")
-            self.send_header("Set-Cookie", C.OutputString())
-            self.end_headers()
+                cart_items_cookie += str(item["product"]) + ","
+            C.set("item", cart_items_cookie, cart_items_cookie)
+            __response_header_with_cookie()
+
             self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == ('/cart/'):
-
             __response_header()
-            saved_list = cookies.SimpleCookie(self.headers.get('Cookie'))
-            print(saved_list)
-            self.wfile.write(bytes("test", "utf-8"))
+
+            if Cart.cart_item:
+                self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
+            else:
+                cart_items = __get_cookies()
+                for item in cart_items:
+                    Cart.cart(int(item), 1, ProductsList.products)
+                self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
             Purchase.calculate_total()
+
             __response_header()
             self.wfile.write(bytes(outputs.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
+            C.set("item", "", "")
             Purchase.adjust_inventory()
-            __response_header()
+            __response_header_with_cookie()
             Purchase._total_purchase = 0
             Cart.cart_item = []
             self.wfile.write(bytes(outputs.Success.success_msg(), "utf-8"))
