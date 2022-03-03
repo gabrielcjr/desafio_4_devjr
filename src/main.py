@@ -12,8 +12,6 @@ PORT = 8080
 file.File.load_product_data()
 
 
-
-
 class Server(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -35,12 +33,12 @@ class Server(BaseHTTPRequestHandler):
 
         def __create_cookie():
             return ''.join(str(item["product"]) + "," for item in Cart.cart_item)
-        
+
         def __get_cookies():
             get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
             cart_items_raw = get_cookie["item"].value
             return __remove_last_comma(cart_items_raw).split(",")
-        
+
         def __remove_last_comma(value):
             return value[:-1]
 
