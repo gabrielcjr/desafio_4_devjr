@@ -1,5 +1,7 @@
 from random import randint
 
+from cart import Purchase, Cart
+
 
 class Header:
     @staticmethod
@@ -34,8 +36,12 @@ class CartPurchase:
         return "<br>This is your purchase. Thanks for buying at Full Cycle Store!<br>"
 
     @staticmethod
-    def purchase_details(name, amount, price, subtotal):
-        return "<br>     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (name, amount, price, subtotal)
+    def purchase_details(value):
+        result = ''
+        for index, item in enumerate(value):
+            item = value[index]
+            result += "<br>     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>" % (item["name"], item["amount"], item["price"], item["subtotal_price"])
+        return result
 
     @staticmethod
     def total_purchase(total):
@@ -48,8 +54,9 @@ class CartPurchase:
     @staticmethod
     def current_cart():
         from cart import Purchase
+
         return (
-            f'<html><body>{Header.header()}<br>{Purchase.purchase_result()}'
+            f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(Cart.items)}'
             + '<br><a href="http://localhost:8080/">Go back<a/><br> \
             <a href="http://localhost:8080/checkout/">Checkout</a> \
             </a></body></html>'
