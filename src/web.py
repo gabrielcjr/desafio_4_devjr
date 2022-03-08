@@ -1,7 +1,7 @@
 from products import ProductsList
 from cart import Cart, Purchase
 import file
-import outputs
+import outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import cookies
 from random import seed
@@ -32,7 +32,7 @@ class Server(BaseHTTPRequestHandler):
             self.end_headers()
 
         def __create_cookie():
-            return ''.join(str(item["product"]) + "," for item in Cart.cart_item)
+            return ''.join(str(item["product"]) + "," for item in Cart.items)
 
         def __get_cookies():
             get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
@@ -44,7 +44,7 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == '/':
             __response_header()
-            self.wfile.write(bytes(outputs.List.list_products(), "utf-8"))
+            self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ('/cart/' + ID):
             Cart.cart(int(ID), 1, ProductsList.products)
@@ -52,30 +52,30 @@ class Server(BaseHTTPRequestHandler):
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
 
-            self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
+            self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == ('/cart/'):
             __response_header()
-            if Cart.cart_item:
-                self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
+            if Cart.items:
+                self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
                     Cart.cart(int(item), 1, ProductsList.products)
-                self.wfile.write(bytes(outputs.CartPurchase.current_cart(), "utf-8"))
+                self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
             Purchase.calculate_total()
             __response_header()
-            self.wfile.write(bytes(outputs.Checkout.checkout(), "utf-8"))
+            self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
             Purchase.adjust_inventory()
             __response_header()
             Purchase._total_purchase = 0
-            Cart.cart_item = []
-            self.wfile.write(bytes(outputs.Success.success_msg(), "utf-8"))
+            Cart.items = []
+            self.wfile.write(bytes(outputs_web.Success.success_msg(), "utf-8"))
 
 
 server = HTTPServer((HOST, PORT), Server)

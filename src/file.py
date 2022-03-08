@@ -34,6 +34,10 @@ class File:
         return lines
 
 
+# leio, transcrever de file para class Product
+# escrevo, transcrever class Product para file
+
+
 class BuildProductList(File):
 
     def _read_products_list(file):

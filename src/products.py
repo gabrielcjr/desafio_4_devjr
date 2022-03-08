@@ -1,5 +1,5 @@
 from typing import Union
-from outputs import InventoryCheck
+from outputs_web import InventoryCheck
 
 
 class ProductsList:

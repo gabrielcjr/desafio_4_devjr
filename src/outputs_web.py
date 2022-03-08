@@ -15,11 +15,16 @@ class List:
     @staticmethod
     def list_products() -> str:
         from products import ProductsList
-        html: str = '<html><body>' + Header.header() + '<br>' + List.list() + '<br>' + \
-            ProductsList.products_list(ProductsList.products) + '<br>\
+        return (
+            (
+                f'<html><body>{Header.header()}<br>{List.list()}<br>'
+                + ProductsList.products_list(ProductsList.products)
+            )
+            + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\
                     </body></html>'
-        return html
+        )
+        
 
 
 class CartPurchase:
@@ -43,11 +48,12 @@ class CartPurchase:
     @staticmethod
     def current_cart():
         from cart import Purchase
-        html = '<html><body>' + Header.header() + '<br>' + Purchase.purchase_result() + \
-            '<br><a href="http://localhost:8080/">Go back<a/><br> \
+        return (
+            f'<html><body>{Header.header()}<br>{Purchase.purchase_result()}'
+            + '<br><a href="http://localhost:8080/">Go back<a/><br> \
             <a href="http://localhost:8080/checkout/">Checkout</a> \
             </a></body></html>'
-        return html
+        )
 
 
 class Checkout:
@@ -55,21 +61,31 @@ class Checkout:
     @staticmethod
     def checkout():
         from cart import Purchase
-        html = '<html><body>' + Header.header() + '<br>' + \
-            CartPurchase.total_purchase(Purchase._total_purchase) + \
-            '<a href="http://localhost:8080/success/">Purchase</a>\
+        return (
+            (
+                f'<html><body>{Header.header()}<br>'
+                + CartPurchase.total_purchase(Purchase._total_purchase)
+            )
+            + '<a href="http://localhost:8080/success/">Purchase</a>\
             </body></html>'
-        return html
+        )
+        
 
 
 class Success:
 
     @staticmethod
     def success_msg():
-        html = '<html><body>' + Header.header() + '<br>' + \
-            'Congratulations! Your order number ' + str(randint(8000, 10000)) + ' has been placed successfully \
+        return (
+            (
+                f'<html><body>{Header.header()}<br>'
+                + 'Congratulations! Your order number '
+            )
+            + str(randint(8000, 10000))
+            + ' has been placed successfully \
             </body></html>'
-        return html
+        )
+        
 
 
 class InventoryCheck:

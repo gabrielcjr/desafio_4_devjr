@@ -12,6 +12,24 @@ Acesse o link
 http://localhost:8080
 ```
 
+08/03/2022
+
+Rodar tanto em console como web. console.py and web.py
+
+Criar classe separada pra ver o que é o produto
+
+Criar modelo do produto
+
+Melhorar cart
+
+Carregar cart instanciado , sem usar variável de classe
+
+Leio, transcrever de file para class Product
+
+Escrevo, transcrever class Product para file
+
+---
+
 Clique no item que desejar.
 
 Clique em Checkout! para finalizar a compra ou em Keep buying! para retornar a tela inicial e escolher mais opções.
@@ -19,7 +37,7 @@ Clique em Checkout! para finalizar a compra ou em Keep buying! para retornar a t
 Na tela seguinte ao do carrinho, você terá o valor total da compra. Clicando em Purchase!, a compra será finalizada.
 
 
-22/03/2022
+22/02/2022
 
 Disponibilizar a aplicação na Web - HTML - Sem framework, sem CSS
 
