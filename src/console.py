@@ -12,7 +12,7 @@ def main():
 
     outputs_console.Header.header()
 
-    outputs_console.List.list()
+    outputs_console.List.list_items()
 
     file.File.load_product_data()
 

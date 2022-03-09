@@ -1,6 +1,6 @@
 import re
 from typing import Union
-import outputs_web
+import outputs_console
 
 
 class Inputs:
@@ -13,7 +13,7 @@ class Inputs:
             if re.match("^[1-" + str(all_products) + "]$", product_input):
                 return int(product_input)
             else:
-                outputs_web.InputsWarnings.input_product()
+                outputs_console.InputsWarnings.input_product()
 
     @staticmethod
     def input_amount(message: str) -> Union[float, None]:
@@ -23,7 +23,7 @@ class Inputs:
             if re.match("^[1-9]$", amount_input):
                 return float(amount_input)
             else:
-                outputs_web.InputsWarnings.input_amount()
+                outputs_console.InputsWarnings.input_amount()
 
     @staticmethod
     def input_keep_purchase(message: str) -> Union[str, None]:
@@ -33,4 +33,4 @@ class Inputs:
             if input_option in ["n", "s"]:
                 return input_option
             else:
-                outputs_web.InputsWarnings.input_keep()
+                outputs_console.InputsWarnings.input_keep()

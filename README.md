@@ -14,8 +14,6 @@ http://localhost:8080
 
 08/03/2022
 
-Rodar tanto em console como web. console.py and web.py
-
 Criar classe separada pra ver o que é o produto
 
 Criar modelo do produto
@@ -29,6 +27,8 @@ Leio, transcrever de file para class Product
 Escrevo, transcrever class Product para file
 
 ---
+
+Rodar tanto em console como web. console.py and web.py
 
 Clique no item que desejar.
 

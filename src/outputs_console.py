@@ -8,15 +8,15 @@ class Header:
 
 class List:
     @staticmethod
-    def list() -> None:
+    def list_items() -> None:
         return print("Lista de produtos da loja \n")
 
     @staticmethod
-    def products_list(list: list):
+    def products_list(items: list) -> None:
         list_products: str = ""
-        for product in list:
-            name: str = list[product]["name"]
-            price: float = list[product]["price"]
+        for product in items:
+            name: str = items[product]["name"]
+            price: float = items[product]["price"]
             list_products += "%s - %s R$ %.2f\n" % (product, name, price)
         return print(list_products)
 
@@ -62,13 +62,12 @@ class CartPurchase:
     @staticmethod
     def keep_purchase(value, cart):
         utils.clear()
-        CartPurchase.your_purchase()
-        from cart import Purchase, Cart
+        from cart import Purchase
         if value == 'n':
-            for index, item in enumerate(cart):
+            CartPurchase.your_purchase()
+            for item in cart:
                 CartPurchase.purchase_details(item["name"], item["amount"], item["price"], item["subtotal_price"])
-            Purchase.calculate_total(Cart.items)
-            Purchase.adjust_inventory(Cart.items)
+            Purchase.place_order()
             CartPurchase.total_purchase(Purchase._total_purchase)
             exit(0)
         else:

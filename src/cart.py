@@ -1,5 +1,6 @@
 
 import file
+from outputs_console import CartPurchase
 
 
 class Cart:
@@ -41,3 +42,10 @@ class Purchase:
         for index, items in enumerate(value):
             item = Cart.items[index]
             file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])
+    
+    @staticmethod
+    def place_order():
+        Purchase.calculate_total(Cart.items)
+        Purchase.adjust_inventory(Cart.items)
+        
+        
