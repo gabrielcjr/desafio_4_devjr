@@ -6,14 +6,6 @@ class ProductsList:
 
     products: dict = {}
 
-    @staticmethod
-    def products_list(dict: dict):
-        list_products: str = ""
-        for product in dict:
-            name: str = dict[product]["name"]
-            price: float = dict[product]["price"]
-            list_products += "<a href=\"cart\%s\">%s - %s $ %.2f</a><br>" % (product, product, name, price)
-        return list_products
 
 
 class SelectedProduct:

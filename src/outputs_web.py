@@ -1,6 +1,6 @@
 from random import randint
 
-from cart import Purchase, Cart
+from cart import Cart
 
 
 class Header:
@@ -20,12 +20,21 @@ class List:
         return (
             (
                 f'<html><body>{Header.header()}<br>{List.list()}<br>'
-                + ProductsList.products_list(ProductsList.products)
+                + List.products_list(ProductsList.products)
             )
             + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\
                     </body></html>'
         )
+    
+    @staticmethod
+    def products_list(dict: dict):
+        list_products: str = ""
+        for product in dict:
+            name: str = dict[product]["name"]
+            price: float = dict[product]["price"]
+            list_products += "<a href=\"cart\%s\">%s - %s $ %.2f</a><br>" % (product, product, name, price)
+        return list_products
         
 
 

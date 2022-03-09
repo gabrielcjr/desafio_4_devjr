@@ -18,7 +18,7 @@ def main():
 
     while True:
 
-        print(ProductsList.products_list(ProductsList.products))
+        outputs_console.List.products_list(ProductsList.products)
 
         user_input_product: str = Inputs.input_product(
             outputs_console.InputsQuestions.which_product(), ProductsList.products
@@ -36,7 +36,7 @@ def main():
 
         Cart.cart(user_input_product, user_input_amount, ProductsList.products)
 
-        Purchase.keep_purchase(user_input_keep_purchase)
+        outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, Cart.items)
 
 
 main()

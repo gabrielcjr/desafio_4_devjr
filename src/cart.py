@@ -1,12 +1,11 @@
 
 import file
-import outputs_console
-import outputs_web
 
 
 class Cart:
 
     items: list = []
+    
 
     @staticmethod
     def cart(product: int, amount: int, products_list: dict):
@@ -15,6 +14,7 @@ class Cart:
             products_list, product, amount
         )
         Cart.items.append(validated_choice)
+
 
     def add_item(self):
         pass
@@ -30,14 +30,14 @@ class Purchase:
 
     _total_purchase: float = 0
 
+
     @staticmethod
-    def calculate_total():
-        for index, itens in enumerate(Cart.items):
-            item = Cart.items[index]
+    def calculate_total(value):
+        for item in value:
             Purchase._total_purchase += item["subtotal_price"]
 
     @staticmethod
-    def adjust_inventory():
-        for index, itens in enumerate(Cart.items):
+    def adjust_inventory(value):
+        for index, items in enumerate(value):
             item = Cart.items[index]
             file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])

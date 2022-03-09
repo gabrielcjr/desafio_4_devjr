@@ -65,13 +65,13 @@ class Server(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
-            Purchase.calculate_total()
+            Purchase.calculate_total(Cart.items)
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
-            Purchase.adjust_inventory()
+            Purchase.adjust_inventory(Cart.items)
             __response_header()
             Purchase._total_purchase = 0
             Cart.items = []

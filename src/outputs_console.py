@@ -1,3 +1,5 @@
+from utils import utils
+
 class Header:
     @staticmethod
     def header() -> None:
@@ -8,6 +10,15 @@ class List:
     @staticmethod
     def list() -> None:
         return print("Lista de produtos da loja \n")
+
+    @staticmethod
+    def products_list(list: list):
+        list_products: str = ""
+        for product in list:
+            name: str = list[product]["name"]
+            price: float = list[product]["price"]
+            list_products += "%s - %s R$ %.2f\n" % (product, name, price)
+        return print(list_products)
 
 
 class InputsQuestions:
@@ -45,8 +56,23 @@ class CartPurchase:
         return print("\nO valor total da compra: %.2f" % (total))
 
     @staticmethod
-    def keep_purchase():
+    def keep_purchase_title():
         return print("Selecione o produto conforme a lista abaixo")
+    
+    @staticmethod
+    def keep_purchase(value, cart):
+        utils.clear()
+        CartPurchase.your_purchase()
+        from cart import Purchase, Cart
+        if value == 'n':
+            for index, item in enumerate(cart):
+                CartPurchase.purchase_details(item["name"], item["amount"], item["price"], item["subtotal_price"])
+            Purchase.calculate_total(Cart.items)
+            Purchase.adjust_inventory(Cart.items)
+            CartPurchase.total_purchase(Purchase._total_purchase)
+            exit(0)
+        else:
+            CartPurchase.keep_purchase_title()
 
 
 class InputsWarnings:
