@@ -1,16 +1,5 @@
 import os
 from typing import List
-# from typing import Any
-
-# from abc import ABC, abstractmethod
-
-# class IPersistence(ABC):
-
-#     @abstractmethod
-#     def add_product_list(self) -> Any: pass
-
-#     @abstractmethod
-#     def save_product_inventory(self) -> Any: pass
 
 
 class File:
@@ -57,22 +46,22 @@ class BuildProductList(File):
         ProductsList.products[int(product_data[0])] = {
             "name": product_data[1],
             "price": float(product_data[2]),
-            "inventory": int(product_data[3]),
+            "stock": int(product_data[3]),
         }
 
 
-class UpdateInventory(File):
+class UpdateStock(File):
 
     @staticmethod
-    def save_product_inventory(product, inventory):
+    def save_product_stock(product, stock):
         lines = File._read_lines('r')
         line = lines[product - 1]
         semicolon_pos_max = line.rfind(";") - 2
-        new_line = line[:semicolon_pos_max] + str(inventory) + ";\n"
+        new_line = line[:semicolon_pos_max] + str(stock) + ";\n"
         lines[product - 1] = new_line
-        UpdateInventory.__update_inventory(lines, 'w')
+        UpdateStock.__update_stock(lines, 'w')
 
-    def __update_inventory(change, mode):
+    def __update_stock(change, mode):
         file = File.open_file(mode)
         file.writelines(change)
         file.close()

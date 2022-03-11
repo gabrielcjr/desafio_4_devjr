@@ -38,14 +38,14 @@ class Purchase:
             Purchase._total_purchase += item["subtotal_price"]
 
     @staticmethod
-    def adjust_inventory(value):
+    def adjust_stock(value):
         for index, items in enumerate(value):
             item = Cart.items[index]
-            file.UpdateInventory.save_product_inventory(item["product"], item["available_inventory"])
+            file.UpdateStock.save_product_stock(item["product"], item["available_stock"])
     
     @staticmethod
     def place_order():
         Purchase.calculate_total(Cart.items)
-        Purchase.adjust_inventory(Cart.items)
+        Purchase.adjust_stock(Cart.items)
         
         

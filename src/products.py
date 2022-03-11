@@ -1,5 +1,5 @@
 from typing import Union
-from outputs_web import InventoryCheck
+from outputs_web import StockCheck
 
 
 class ProductsList:
@@ -10,7 +10,7 @@ class ProductsList:
 
 class SelectedProduct:
 
-    __MINIMAL_INVENTORY_AVAILABILITY: int = 10
+    __MINIMAL_STOCK_AVAILABILITY: int = 10
 
     @staticmethod
     def selected_product(
@@ -18,8 +18,8 @@ class SelectedProduct:
     ) -> dict:
         for product in products_options:
             if product_item == product:
-                inventory = int(products_options[product]["inventory"])
-                if SelectedProduct.__inventory_check(amount, inventory):
+                stock = int(products_options[product]["stock"])
+                if SelectedProduct.__stock_check(amount, stock):
                     price: float = products_options[product]["price"]
                     product_name: str = products_options[product]["name"]
                     return {
@@ -28,17 +28,17 @@ class SelectedProduct:
                         "price": price,
                         "subtotal_price": price * amount,
                         "amount": amount,
-                        "available_inventory": inventory - int(amount),
+                        "available_stock": stock - int(amount),
                     }
 
     @classmethod
-    def __inventory_check(
-        self, input_amount: int, item_inventory: int
+    def __stock_check(
+        self, input_amount: int, item_stock: int
     ) -> Union[bool, None]:
-        inventory: int = int(item_inventory)
+        stock: int = int(item_stock)
         if input_amount <= (
-            inventory - SelectedProduct.__MINIMAL_INVENTORY_AVAILABILITY
+            stock - SelectedProduct.__MINIMAL_STOCK_AVAILABILITY
         ):
             return True
-        InventoryCheck.inventory_not_available()
+        StockCheck.stock_not_available()
         exit(0)

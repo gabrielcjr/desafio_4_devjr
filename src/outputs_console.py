@@ -93,7 +93,7 @@ class InputsWarnings:
         return print("Por favor, digite s para sim e n para não")
 
 
-class InventoryCheck:
+class StockCheck:
     @staticmethod
-    def inventory_not_available():
+    def stock_not_available():
         print("Não temos estoque suficiente para este produto.")

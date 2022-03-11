@@ -104,7 +104,7 @@ class Success:
         
 
 
-class InventoryCheck:
+class StockCheck:
     @staticmethod
-    def inventory_not_available():
+    def stock_not_available():
         "<br>There is not enough itens available for this product.<br>"

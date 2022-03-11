@@ -71,7 +71,7 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == '/success/':
             seed()
-            Purchase.adjust_inventory(Cart.items)
+            Purchase.adjust_stock(Cart.items)
             __response_header()
             Purchase._total_purchase = 0
             Cart.items = []

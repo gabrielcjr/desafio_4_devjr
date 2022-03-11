@@ -17,6 +17,8 @@ def main():
     file.File.load_product_data()
 
     while True:
+        
+        print(ProductsList.products)
 
         outputs_console.List.products_list(ProductsList.products)
 
