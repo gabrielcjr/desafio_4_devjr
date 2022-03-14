@@ -1,4 +1,4 @@
-from utils import utils
+from service.utils import utils
 
 class Header:
     @staticmethod
@@ -62,7 +62,7 @@ class CartPurchase:
     @staticmethod
     def keep_purchase(value, cart):
         utils.clear()
-        from cart import Purchase
+        from entity.cart import Purchase
         if value == 'n':
             CartPurchase.your_purchase()
             for item in cart:
@@ -77,7 +77,7 @@ class CartPurchase:
 class InputsWarnings:
     @staticmethod
     def input_product():
-        from products import ProductsList
+        from service.products import ProductsList
 
         return print(
             "Por favor, escolha o produto entre 1 e %s"

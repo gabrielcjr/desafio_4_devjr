@@ -1,6 +1,6 @@
 from random import randint
 
-from cart import Cart
+from entity.cart import Cart
 
 
 class Header:
@@ -16,7 +16,7 @@ class List:
 
     @staticmethod
     def list_products() -> str:
-        from products import ProductsList
+        from service.products import ProductsList
         return (
             (
                 f'<html><body>{Header.header()}<br>{List.list()}<br>'
@@ -62,7 +62,7 @@ class CartPurchase:
 
     @staticmethod
     def current_cart():
-        from cart import Purchase
+        from entity.cart import Purchase
 
         return (
             f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(Cart.items)}'
@@ -76,7 +76,7 @@ class Checkout:
 
     @staticmethod
     def checkout():
-        from cart import Purchase
+        from entity.cart import Purchase
         return (
             (
                 f'<html><body>{Header.header()}<br>'

@@ -1,10 +1,13 @@
 from typing import Union
-from outputs_web import StockCheck
+from template.outputs_web import StockCheck
+from entity.product import Product
 
 
 class ProductsList:
 
+    
     products: dict = {}
+    
 
 
 

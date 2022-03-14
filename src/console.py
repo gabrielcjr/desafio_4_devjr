@@ -1,9 +1,9 @@
-from products import ProductsList
-from inputs import Inputs
-from cart import Cart, Purchase
-import utils
-import file
-import outputs_console
+from service.products import ProductsList
+from service.inputs import Inputs
+from entity.cart import Cart, Purchase
+import service.utils as utils
+import service.file as file
+import template.outputs_console as outputs_console
 
 
 def main():
@@ -18,8 +18,6 @@ def main():
 
     while True:
         
-        print(ProductsList.products)
-
         outputs_console.List.products_list(ProductsList.products)
 
         user_input_product: str = Inputs.input_product(

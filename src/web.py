@@ -1,7 +1,7 @@
-from products import ProductsList
-from cart import Cart, Purchase
-import file
-import outputs_web
+from service.products import ProductsList
+from entity.cart import Cart, Purchase
+import service.file as file
+import template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import cookies
 from random import seed

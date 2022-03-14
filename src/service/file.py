@@ -42,7 +42,7 @@ class BuildProductList(File):
         BuildProductList.__add_product_list(product_data)
 
     def __add_product_list(product_data):
-        from products import ProductsList
+        from service.products import ProductsList
         ProductsList.products[int(product_data[0])] = {
             "name": product_data[1],
             "price": float(product_data[2]),

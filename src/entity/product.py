@@ -11,6 +11,20 @@ class Product:
 		self.price = price
 		self.stock = stock
 	
+	
+	def add_products(self):
+		return {
+		    int(self.id): {
+		        "name": self.name,
+		        "price": float(self.price),
+		        "stock": int(self.stock),
+		    }
+		}
+	
+	def get(self):
+		return self.name;
+	
+	
 	def increment_stock(self, value):
 		Product.stock = Product.stock + value
 
@@ -19,3 +33,4 @@ class Product:
 		if new_stock < 0:
 			raise Exception('Stock must be greater or equal than 0')
 		self.stock = self.stock - value
+

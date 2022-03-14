@@ -1,6 +1,6 @@
 
-import file
-from outputs_console import CartPurchase
+import service.file as file
+from template.outputs_console import CartPurchase
 
 
 class Cart:
@@ -10,7 +10,7 @@ class Cart:
 
     @staticmethod
     def cart(product: int, amount: int, products_list: dict):
-        from products import SelectedProduct
+        from service.products import SelectedProduct
         validated_choice: dict = SelectedProduct.selected_product(
             products_list, product, amount
         )
