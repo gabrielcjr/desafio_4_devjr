@@ -17,6 +17,7 @@ class Cart:
         Cart.items.append(validated_choice)
 
 
+
     def add_item(self):
         pass
 
@@ -24,7 +25,7 @@ class Cart:
         pass
 
 # Carregar cart instanciado , sem usar variavel de classe
-cart = Cart()
+# cart = Cart()
 
 
 class Purchase:
@@ -34,8 +35,9 @@ class Purchase:
 
     @staticmethod
     def calculate_total(value):
-        for item in value:
-            Purchase._total_purchase += item["subtotal_price"]
+        if Purchase._total_purchase == 0:
+            for item in value:
+                Purchase._total_purchase += item["subtotal_price"]
 
     @staticmethod
     def adjust_stock(value):

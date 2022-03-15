@@ -47,11 +47,12 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ('/cart/' + ID):
+            # print(ProductsList.products)
+            # print(ID)
             Cart.cart(int(ID), 1, ProductsList.products)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
-
             self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == ('/cart/'):

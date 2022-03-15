@@ -8,7 +8,7 @@ class File:
     print(BASE_PATH)
 
     def open_file(mode):
-        return open(f'{File.BASE_PATH}/_store_file.txt', mode)
+        return open(f'{File.BASE_PATH}/../_store_file.txt', mode)
 
     @staticmethod
     def load_product_data():
