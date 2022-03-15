@@ -1,6 +1,5 @@
 from typing import Union
 from template.outputs_web import StockCheck
-from entity.product import Product
 
 
 class ProductsList:

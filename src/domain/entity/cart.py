@@ -1,6 +1,10 @@
+import sys
+import os
 
-import service.file as file
-from template.outputs_console import CartPurchase
+currentdir = f'{os.path.dirname(os.path.realpath(__file__))}/../../'
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+import infrastructure.file.file as file
 
 
 class Cart:
@@ -16,8 +20,6 @@ class Cart:
         )
         Cart.items.append(validated_choice)
 
-
-
     def add_item(self):
         pass
 
@@ -28,16 +30,16 @@ class Cart:
 # cart = Cart()
 
 
-class Purchase:
+class Checkout:
 
     _total_purchase: float = 0
 
 
     @staticmethod
     def calculate_total(value):
-        if Purchase._total_purchase == 0:
+        if Checkout._total_purchase == 0:
             for item in value:
-                Purchase._total_purchase += item["subtotal_price"]
+                Checkout._total_purchase += item["subtotal_price"]
 
     @staticmethod
     def adjust_stock(value):
@@ -47,7 +49,7 @@ class Purchase:
     
     @staticmethod
     def place_order():
-        Purchase.calculate_total(Cart.items)
-        Purchase.adjust_stock(Cart.items)
+        Checkout.calculate_total(Cart.items)
+        Checkout.adjust_stock(Cart.items)
         
         

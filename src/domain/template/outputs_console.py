@@ -62,13 +62,13 @@ class CartPurchase:
     @staticmethod
     def keep_purchase(value, cart):
         utils.clear()
-        from entity.cart import Purchase
+        from entity.cart import Checkout
         if value == 'n':
             CartPurchase.your_purchase()
             for item in cart:
                 CartPurchase.purchase_details(item["name"], item["amount"], item["price"], item["subtotal_price"])
-            Purchase.place_order()
-            CartPurchase.total_purchase(Purchase._total_purchase)
+            Checkout.place_order()
+            CartPurchase.total_purchase(Checkout._total_purchase)
             exit(0)
         else:
             CartPurchase.keep_purchase_title()

@@ -1,6 +1,6 @@
 from service.products import ProductsList
-from entity.cart import Cart, Purchase
-import service.file as file
+from entity.cart import Cart, Checkout
+import infrastructure.file.file as file
 import template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import cookies
@@ -66,15 +66,15 @@ class Server(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
-            Purchase.calculate_total(Cart.items)
+            Checkout.calculate_total(Cart.items)
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
-            Purchase.adjust_stock(Cart.items)
+            Checkout.adjust_stock(Cart.items)
             __response_header()
-            Purchase._total_purchase = 0
+            Checkout._total_purchase = 0
             Cart.items = []
             self.wfile.write(bytes(outputs_web.Success.success_msg(), "utf-8"))
 

@@ -62,7 +62,7 @@ class CartPurchase:
 
     @staticmethod
     def current_cart():
-        from entity.cart import Purchase
+        from entity.cart import Checkout
 
         return (
             f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(Cart.items)}'
@@ -76,11 +76,11 @@ class Checkout:
 
     @staticmethod
     def checkout():
-        from entity.cart import Purchase
+        from entity.cart import Checkout
         return (
             (
                 f'<html><body>{Header.header()}<br>'
-                + CartPurchase.total_purchase(Purchase._total_purchase)
+                + CartPurchase.total_purchase(Checkout._total_purchase)
             )
             + '<a href="http://localhost:8080/success/">Purchase</a>\
             </body></html>'
