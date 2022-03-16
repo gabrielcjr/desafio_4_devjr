@@ -1,3 +1,6 @@
+from crypt import methods
+
+
 class Cart:
 
     __items: list = []
@@ -26,9 +29,12 @@ class Cart:
         item_to_remove = value - 1
         Cart.__items.pop(item_to_remove)
 
-
-    def cart_items(self):
+    def get_cart_items(self):
         return self.__items
+    
+    def set_cart_items(self, value):
+        self.__items = value
+
 
 
 

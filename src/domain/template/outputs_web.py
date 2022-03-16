@@ -1,5 +1,5 @@
 from random import randint
-from entity.cart import Cart
+from service.cart import cart
 
 
 class Header:
@@ -64,7 +64,7 @@ class CartPurchase:
         from entity.checkout import Checkout
 
         return (
-            f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(Cart.__items)}'
+            f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(cart.get_cart_items())}'
             + '<br><a href="http://localhost:8080/">Go back<a/><br> \
             <a href="http://localhost:8080/checkout/">Checkout</a> \
             </a></body></html>'

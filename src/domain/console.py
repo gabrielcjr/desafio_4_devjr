@@ -44,7 +44,7 @@ def main():
 
         cart.add_item(user_input_product, user_input_amount, ProductsList.products)
 
-        outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.cart_items())
+        outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.get_cart_items())
 
 
 main()
