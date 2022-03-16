@@ -6,8 +6,8 @@ services:
       dockerfile: .docker/Dockerfile
       context: .
     container_name: desafio3-app
-    entrypoint: python3 src/console.py
-    volumes:
-      - .:/home/app/
+    entrypoint: python3 src/domain/console.py
+    # volumes:
+    #   - .:/home/app/
     tty: true
     stdin_open: true
