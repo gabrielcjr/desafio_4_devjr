@@ -62,8 +62,8 @@ class CartPurchase:
     @staticmethod
     def keep_purchase(value, cart):
         utils.clear()
-        from entity.cart import Checkout
         if value == 'n':
+            from entity.checkout import Checkout
             CartPurchase.your_purchase()
             for item in cart:
                 CartPurchase.purchase_details(item["name"], item["amount"], item["price"], item["subtotal_price"])

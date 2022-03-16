@@ -1,5 +1,6 @@
 from service.products import ProductsList
-from entity.cart import Cart, Checkout
+from entity.cart import Cart
+from entity.checkout import Checkout
 import infrastructure.file.file as file
 import template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -32,7 +33,7 @@ class Server(BaseHTTPRequestHandler):
             self.end_headers()
 
         def __create_cookie():
-            return ''.join(str(item["product"]) + "," for item in Cart.items)
+            return ''.join(str(item["product"]) + "," for item in Cart.__items)
 
         def __get_cookies():
             get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
@@ -49,7 +50,7 @@ class Server(BaseHTTPRequestHandler):
         if self.path == ('/cart/' + ID):
             # print(ProductsList.products)
             # print(ID)
-            Cart.cart(int(ID), 1, ProductsList.products)
+            Cart.add_item(int(ID), 1, ProductsList.products)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
@@ -57,25 +58,25 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == ('/cart/'):
             __response_header()
-            if Cart.items:
+            if Cart.__items:
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
-                    Cart.cart(int(item), 1, ProductsList.products)
+                    Cart.add_item(int(item), 1, ProductsList.products)
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
-            Checkout.calculate_total(Cart.items)
+            Checkout.calculate_total(Cart.__items)
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
-            Checkout.adjust_stock(Cart.items)
+            Checkout.adjust_stock(Cart.__items)
             __response_header()
             Checkout._total_purchase = 0
-            Cart.items = []
+            Cart.__items = []
             self.wfile.write(bytes(outputs_web.Success.success_msg(), "utf-8"))
 
 
