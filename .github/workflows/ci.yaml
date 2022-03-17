@@ -1,29 +1,29 @@
-name: Test pipeline
-on:
-  pull_request:
-    branches: [master]
+# name: Test pipeline
+# on:
+#   pull_request:
+#     branches: [master]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Build the stack
-        run: docker-compose up -d
+#       - name: Build the stack
+#         run: docker-compose up -d
 
-      - name: Mypy - Check static typing
-        run: docker-compose exec -T app pipenv run mypy src/**/*.py
+#       - name: Mypy - Check static typing
+#         run: docker-compose exec -T app pipenv run mypy src/**/*.py
 
-      # - name: Run tests
-      #   run: docker-compose exec -T app pipenv run test
+# - name: Run tests
+#   run: docker-compose exec -T app pipenv run test
 
-      # - name: Run coverage
-      #   run: docker-compose exec -T app pipenv run coverage
+# - name: Run coverage
+#   run: docker-compose exec -T app pipenv run coverage
 
-      # - name: Run coverage report
-      #   run: docker-compose exec -T app pipenv run coverageReport
+# - name: Run coverage report
+#   run: docker-compose exec -T app pipenv run coverageReport
 
-      - name: Run lint
-        run: docker-compose exec -T app pipenv run flake8
+# - name: Run lint
+#   run: docker-compose exec -T app pipenv run flake8
