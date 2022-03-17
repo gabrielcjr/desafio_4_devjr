@@ -1,4 +1,4 @@
-from service.products import ProductsList
+from service.product import product
 from service.cart import cart
 from entity.checkout import Checkout
 import infrastructure.file.file as file
@@ -49,7 +49,7 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ('/cart/' + ID):
-            cart.add_item(int(ID), 1, ProductsList.products)
+            cart.add_item(int(ID), 1, product.get_products())
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
@@ -62,7 +62,7 @@ class Server(BaseHTTPRequestHandler):
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
-                    cart.add_item(int(item), 1, ProductsList.products)
+                    cart.add_item(int(item), 1, product.get_products())
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':

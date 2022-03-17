@@ -15,11 +15,11 @@ class List:
 
     @staticmethod
     def list_products() -> str:
-        from service.products import ProductsList
+        from service.product import product
         return (
             (
                 f'<html><body>{Header.header()}<br>{List.list()}<br>'
-                + List.products_list(ProductsList.products)
+                + List.products_list(product.get_products())
             )
             + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\

@@ -1,3 +1,4 @@
+from service.product import product
 from service.products import ProductsList
 from service.inputs import Inputs
 from service.cart import cart
@@ -26,10 +27,10 @@ def main():
 
     while True:
 
-        outputs_console.List.products_list(ProductsList.products)
+        outputs_console.List.products_list(product.get_products())
 
         user_input_product: str = Inputs.input_product(
-            outputs_console.InputsQuestions.which_product(), ProductsList.products
+            outputs_console.InputsQuestions.which_product(), product.get_products()
         )
 
         user_input_amount: str = Inputs.input_amount(
@@ -42,7 +43,7 @@ def main():
 
         utils.utils.clear()
 
-        cart.add_item(user_input_product, user_input_amount, ProductsList.products)
+        cart.add_item(user_input_product, user_input_amount, product.get_products())
 
         outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.get_cart_items())
 
