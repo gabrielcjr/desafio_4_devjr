@@ -27,6 +27,8 @@ def main():
 
     while True:
 
+        cart = Cart()
+
         outputs_console.List.products_list(product.get_products())
 
         user_input_product: str = Inputs.input_product(

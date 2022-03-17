@@ -1,6 +1,7 @@
 import os
 from typing import List
-
+from domain.service.collection import products
+from domain.entity.product import Product
 
 class File:
 
@@ -42,8 +43,11 @@ class BuildProductList(File):
         BuildProductList.__add_product_list(product_data)
 
     def __add_product_list(product_data):
-        from entity.product import Product
-        Product.add_products(int(product_data[0]), product_data[1], float(product_data[2]), int(product_data[3]))
+        id = int(product_data[0])
+        name = product_data[1]
+        price = float(product_data[2])
+        stock = int(product_data[3])
+        products.append(Product(id, name, price, stock))
 
 
 class UpdateStock(File):

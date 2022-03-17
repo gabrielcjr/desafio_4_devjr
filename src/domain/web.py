@@ -1,6 +1,6 @@
 from service.product import product
 from service.cart import cart
-from entity.checkout import Checkout
+from domain.service.checkout import Checkout
 import infrastructure.file.file as file
 import template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -33,7 +33,7 @@ class Server(BaseHTTPRequestHandler):
             self.end_headers()
 
         def __create_cookie():
-            cart_items = cart.get_cart_items()
+            cart_items = cart.items()
             return ''.join(str(item["product"]) + "," for item in cart_items)
 
         def __get_cookies():
@@ -57,7 +57,7 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == ('/cart/'):
             __response_header()
-            if cart.get_cart_items():
+            if cart.items():
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
             else:
                 cart_items = __get_cookies()
@@ -66,13 +66,13 @@ class Server(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
         if self.path == '/checkout/':
-            Checkout.calculate_total(cart.get_cart_items())
+            Checkout.calculate_total(cart.items())
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == '/success/':
             seed()
-            Checkout.adjust_stock(cart.get_cart_items())
+            Checkout.adjust_stock(cart.items())
             __response_header()
             Checkout._total_purchase = 0
             cart.set_cart_items([])

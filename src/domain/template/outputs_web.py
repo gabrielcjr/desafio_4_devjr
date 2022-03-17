@@ -61,10 +61,10 @@ class CartPurchase:
 
     @staticmethod
     def current_cart():
-        from entity.checkout import Checkout
+        from domain.service.checkout import Checkout
 
         return (
-            f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(cart.get_cart_items())}'
+            f'<html><body>{Header.header()}<br>{CartPurchase.purchase_details(cart.items())}'
             + '<br><a href="http://localhost:8080/">Go back<a/><br> \
             <a href="http://localhost:8080/checkout/">Checkout</a> \
             </a></body></html>'
@@ -75,7 +75,7 @@ class Checkout:
 
     @staticmethod
     def checkout():
-        from entity.checkout import Checkout
+        from domain.service.checkout import Checkout
         return (
             (
                 f'<html><body>{Header.header()}<br>'
