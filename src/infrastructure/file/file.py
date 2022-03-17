@@ -1,6 +1,6 @@
 import os
-from typing import List
-from domain.service.collection import products
+from typing import Any, List
+from domain.service.collection import Collection
 from domain.entity.product import Product
 
 class File:
@@ -12,7 +12,7 @@ class File:
         return open(f'{File.BASE_PATH}/_store_file.txt', mode)
 
     @staticmethod
-    def load_product_data():
+    def load_product_data() -> Any:
         file = File.open_file("r")
         BuildProductList._read_products_list(file)
         file.close()
@@ -47,7 +47,7 @@ class BuildProductList(File):
         name = product_data[1]
         price = float(product_data[2])
         stock = int(product_data[3])
-        products.append(Product(id, name, price, stock))
+        Collection.products.append(Product(id, name, price, stock))
 
 
 class UpdateStock(File):

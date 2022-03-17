@@ -1,6 +1,6 @@
 import re
 from typing import Union
-import template.outputs_console as outputs_console
+import domain.template.outputs_console as outputs_console
 
 
 class Inputs:

@@ -1,12 +1,14 @@
 
+from typing import List
+
+
 class Cart:
 
     #criar um tipo para manipular quantidade e o produto
-    __items: list = []
+    __items: List = []
 
-    # def __init__(self, product: int = 0, amount: int = 0, products_list: dict = None):
-
-    
+    def __init__(self, items: List):
+        self.__items = items
 
 
     def add_item(product: int, amount: int, products_list: dict):

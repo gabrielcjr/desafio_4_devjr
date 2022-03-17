@@ -1,7 +1,5 @@
 class Product:
 
-
-
 	id: int
 	name: str
 	price: float
@@ -13,13 +11,7 @@ class Product:
 		self.price = price
 		self.stock = stock
 	
-	# Remover métodos e remanejar
-	# def add_products(id, name, price, stock):
-	# 	Product.products[int(id)] = {
-	# 	        "name": name,
-	# 	        "price": float(price),
-	# 	        "stock": int(stock),
-	# 	    }
+
 		
 	# def get_name():
 	# 	return Product.name;

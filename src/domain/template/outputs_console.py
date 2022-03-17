@@ -1,4 +1,4 @@
-from service.utils import utils
+from domain.service.utils import utils
 
 class Header:
     @staticmethod
@@ -77,11 +77,10 @@ class CartPurchase:
 class InputsWarnings:
     @staticmethod
     def input_product():
-        from service.products import ProductsList
-
+        from service.collection import products
         return print(
             "Por favor, escolha o produto entre 1 e %s"
-            % str(len(ProductsList.products))
+            % str(len(products))
         )
 
     @staticmethod
