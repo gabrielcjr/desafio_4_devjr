@@ -1,8 +1,9 @@
-from service.product import product
-from service.cart import cart
+from domain.service.collection import Collection
+from domain.service.cart import cart
 from domain.service.checkout import Checkout
+from domain.service.products import SelectedProduct
 import infrastructure.file.file as file
-import template.outputs_web as outputs_web
+import domain.template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http import cookies
 from random import seed
@@ -11,6 +12,8 @@ HOST = "0.0.0.0"
 PORT = 8080
 
 file.File.load_product_data()
+
+Collection.load_products_list(Collection.products)
 
 
 class Server(BaseHTTPRequestHandler):
@@ -32,7 +35,7 @@ class Server(BaseHTTPRequestHandler):
             self.end_headers()
 
         def __create_cookie():
-            cart_items = cart.items()
+            cart_items = cart.items
             return "".join(str(item["product"]) + "," for item in cart_items)
 
         def __get_cookies():
@@ -48,7 +51,8 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ("/cart/" + ID):
-            cart.add_item(int(ID), 1, product.get_products())
+            validated_choice: dict =  SelectedProduct.selected_product(Collection.products_list, int(ID), 1)
+            cart.add_item(validated_choice)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
@@ -56,29 +60,30 @@ class Server(BaseHTTPRequestHandler):
 
         if self.path == ("/cart/"):
             __response_header()
-            if cart.items():
+            if cart.items:
                 self.wfile.write(
                     bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
                 )
             else:
                 cart_items = __get_cookies()
-                for item in cart_items:
-                    cart.add_item(int(item), 1, product.get_products())
+                for item in cart_items:      
+                    validated_choice: dict =  SelectedProduct.selected_product(Collection.products_list, int(item), 1)
+                    cart.add_item(validated_choice)
                 self.wfile.write(
                     bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
                 )
 
         if self.path == "/checkout/":
-            Checkout.calculate_total(cart.items())
+            Checkout.calculate_total(cart.items)
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
         if self.path == "/success/":
             seed()
-            Checkout.adjust_stock(cart.items())
+            Checkout.adjust_stock(cart.items)
             __response_header()
             Checkout._total_purchase = 0
-            cart.set_cart_items([])
+            # cart.set_cart_items([])
             self.wfile.write(bytes(outputs_web.Success.success_msg(), "utf-8"))
 
 

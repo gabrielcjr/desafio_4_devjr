@@ -1,5 +1,5 @@
 from random import randint
-from console import cart
+from domain.service.cart import cart
 
 
 class Header:
@@ -15,12 +15,11 @@ class List:
 
     @staticmethod
     def list_products() -> str:
-        from service.product import product
-
+        from domain.service.collection import Collection
         return (
             (
                 f"<html><body>{Header.header()}<br>{List.list()}<br>"
-                + List.products_list(product.get_products())
+                + List.products_list(Collection.products_list)
             )
             + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\
@@ -71,7 +70,7 @@ class CartPurchase:
         from domain.service.checkout import Checkout
 
         return (
-            f"<html><body>{Header.header()}<br>{CartPurchase.purchase_details(cart.items())}"
+            f"<html><body>{Header.header()}<br>{CartPurchase.purchase_details(cart.items)}"
             + '<br><a href="http://localhost:8080/">Go back<a/><br> \
             <a href="http://localhost:8080/checkout/">Checkout</a> \
             </a></body></html>'
