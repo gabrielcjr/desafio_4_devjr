@@ -2,14 +2,6 @@ from typing import Union
 from template.outputs_web import StockCheck
 
 
-class ProductsList:
-
-    
-    products: dict = {}
-    
-
-
-
 class SelectedProduct:
 
     __MINIMAL_STOCK_AVAILABILITY: int = 10
@@ -34,13 +26,9 @@ class SelectedProduct:
                     }
 
     @classmethod
-    def __stock_check(
-        self, input_amount: int, item_stock: int
-    ) -> Union[bool, None]:
+    def __stock_check(self, input_amount: int, item_stock: int) -> Union[bool, None]:
         stock: int = int(item_stock)
-        if input_amount <= (
-            stock - SelectedProduct.__MINIMAL_STOCK_AVAILABILITY
-        ):
+        if input_amount <= (stock - SelectedProduct.__MINIMAL_STOCK_AVAILABILITY):
             return True
         StockCheck.stock_not_available()
         exit(0)

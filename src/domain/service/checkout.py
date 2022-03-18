@@ -3,15 +3,15 @@ import os
 from service.cart import cart
 
 
-currentdir = f'{os.path.dirname(os.path.realpath(__file__))}/../../'
+currentdir = f"{os.path.dirname(os.path.realpath(__file__))}/../../"
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 import infrastructure.file.file as file
 
+
 class Checkout:
 
     _total_purchase: float = 0
-
 
     @staticmethod
     def calculate_total(value):
@@ -24,8 +24,10 @@ class Checkout:
         for index, items in enumerate(value):
             cart_items = cart.items()
             item = cart_items[index]
-            file.UpdateStock.save_product_stock(item["product"], item["available_stock"])
-    
+            file.UpdateStock.save_product_stock(
+                item["product"], item["available_stock"]
+            )
+
     @staticmethod
     def place_order():
         Checkout.calculate_total(cart.items())

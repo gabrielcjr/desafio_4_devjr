@@ -14,7 +14,6 @@ file.File.load_product_data()
 
 
 class Server(BaseHTTPRequestHandler):
-
     def do_GET(self):
 
         C = cookies.Morsel()
@@ -34,43 +33,47 @@ class Server(BaseHTTPRequestHandler):
 
         def __create_cookie():
             cart_items = cart.items()
-            return ''.join(str(item["product"]) + "," for item in cart_items)
+            return "".join(str(item["product"]) + "," for item in cart_items)
 
         def __get_cookies():
-            get_cookie = cookies.SimpleCookie(self.headers.get('Cookie'))
+            get_cookie = cookies.SimpleCookie(self.headers.get("Cookie"))
             cart_items_raw = get_cookie["item"].value
             return __remove_last_comma(cart_items_raw).split(",")
 
         def __remove_last_comma(value):
             return value[:-1]
 
-        if self.path == '/':
+        if self.path == "/":
             __response_header()
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
-        if self.path == ('/cart/' + ID):
+        if self.path == ("/cart/" + ID):
             cart.add_item(int(ID), 1, product.get_products())
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
             self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
 
-        if self.path == ('/cart/'):
+        if self.path == ("/cart/"):
             __response_header()
             if cart.items():
-                self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
+                self.wfile.write(
+                    bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
+                )
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
                     cart.add_item(int(item), 1, product.get_products())
-                self.wfile.write(bytes(outputs_web.CartPurchase.current_cart(), "utf-8"))
+                self.wfile.write(
+                    bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
+                )
 
-        if self.path == '/checkout/':
+        if self.path == "/checkout/":
             Checkout.calculate_total(cart.items())
             __response_header()
             self.wfile.write(bytes(outputs_web.Checkout.checkout(), "utf-8"))
 
-        if self.path == '/success/':
+        if self.path == "/success/":
             seed()
             Checkout.adjust_stock(cart.items())
             __response_header()

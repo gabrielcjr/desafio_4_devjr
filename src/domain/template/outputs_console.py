@@ -1,5 +1,6 @@
 from domain.service.utils import utils
 
+
 class Header:
     @staticmethod
     def header() -> None:
@@ -58,15 +59,18 @@ class CartPurchase:
     @staticmethod
     def keep_purchase_title():
         return print("Selecione o produto conforme a lista abaixo")
-    
+
     @staticmethod
     def keep_purchase(value, cart):
         utils.clear()
-        if value == 'n':
+        if value == "n":
             from domain.service.checkout import Checkout
+
             CartPurchase.your_purchase()
             for item in cart:
-                CartPurchase.purchase_details(item["name"], item["amount"], item["price"], item["subtotal_price"])
+                CartPurchase.purchase_details(
+                    item["name"], item["amount"], item["price"], item["subtotal_price"]
+                )
             Checkout.place_order()
             CartPurchase.total_purchase(Checkout._total_purchase)
             exit(0)
@@ -78,10 +82,8 @@ class InputsWarnings:
     @staticmethod
     def input_product():
         from service.collection import products
-        return print(
-            "Por favor, escolha o produto entre 1 e %s"
-            % str(len(products))
-        )
+
+        return print("Por favor, escolha o produto entre 1 e %s" % str(len(products)))
 
     @staticmethod
     def input_amount():

@@ -6,7 +6,6 @@ import domain.template.outputs_console as outputs_console
 import infrastructure.file.file as file
 
 
-
 def main():
 
     utils.utils.clear()
@@ -17,15 +16,12 @@ def main():
 
     file.File.load_product_data()
 
-
     while True:
 
         # Iniciar o cart aqui
-        # cart = Cart()
-        
-        
-        Collection.load_products_list(Collection.products)
+        cart = Cart()
 
+        Collection.load_products_list(Collection.products)
 
         outputs_console.List.products_list(Collection.products_list)
 
@@ -45,7 +41,9 @@ def main():
 
         cart.add_item(user_input_product, user_input_amount, Collection.products_list)
 
-        outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, Collection.products_list)
+        outputs_console.CartPurchase.keep_purchase(
+            user_input_keep_purchase, Collection.products_list
+        )
 
 
 main()
