@@ -1,10 +1,10 @@
+from domain.service.cart import cart
 from domain.service.collection import Collection
 from domain.service.inputs import Inputs
-from domain.entity.cart import Cart
-
 import domain.service.utils as utils
 import domain.template.outputs_console as outputs_console
 import infrastructure.file.file as file
+
 
 
 def main():
@@ -17,10 +17,12 @@ def main():
 
     file.File.load_product_data()
 
+    
+
     while True:
 
         # Iniciar o cart aqui
-        cart = Cart()
+        
 
         Collection.load_products_list(Collection.products)
 
@@ -43,12 +45,10 @@ def main():
             Collection.products_list, user_input_product, user_input_amount
         )
 
-        utils.utils.clear()
-
         cart.add_item(validated_choice)
 
         outputs_console.CartPurchase.keep_purchase(
-            user_input_keep_purchase, Collection.products_list
+            user_input_keep_purchase, cart.items
         )
 
 

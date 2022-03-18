@@ -64,13 +64,14 @@ class CartPurchase:
     def keep_purchase(value, cart):
         utils.clear()
         if value == "n":
-            from domain.service.checkout import Checkout
-
             CartPurchase.your_purchase()
             for item in cart:
+                
                 CartPurchase.purchase_details(
+                    
                     item["name"], item["amount"], item["price"], item["subtotal_price"]
                 )
+            from domain.service.checkout import Checkout
             Checkout.place_order()
             CartPurchase.total_purchase(Checkout._total_purchase)
             exit(0)

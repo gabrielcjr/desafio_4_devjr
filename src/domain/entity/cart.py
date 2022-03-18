@@ -4,10 +4,9 @@ from domain.entity.item import Item
 
 class Cart:
 
-    # criar um tipo para manipular quantidade e o produto
     __items: List[Item] = []
 
-    def __init__(self, items: List = 0):
+    def __init__(self, items: List = []) -> any:
         self.__items = items
 
     def add_item(self, item: dict):

@@ -7,7 +7,7 @@ class Item:
     name: str
     price: float
     subtotal_price: float
-    amount: int
+    amount: float
     available_stock: int
 
     def __init__(
@@ -16,7 +16,7 @@ class Item:
         name: str,
         price: float,
         subtotal_price: float,
-        amount: int,
+        amount: float,
         available_stock: int,
     ):
         self.product = product

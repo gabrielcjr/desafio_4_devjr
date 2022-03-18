@@ -11,13 +11,6 @@ class Product:
         self.price = price
         self.stock = stock
 
-    # def get_name():
-    # 	return Product.name;
-
-    # @staticmethod
-    # def get_products():
-    # 	return Product.products
-
     def increment_stock(self, value):
         self.stock = self.stock + value
 
