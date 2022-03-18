@@ -10,15 +10,10 @@ class Cart:
     def __init__(self, items: List = 0):
         self.__items = items
 
-    def add_item(product: int, amount: int, products_list: dict):
-        from service.products import SelectedProduct
+    def add_item(self, item: dict):
+        self.__items.append(item)
 
-        validated_choice: dict = SelectedProduct.selected_product(
-            products_list, product, amount
-        )
-        Cart.__items.append(validated_choice)
-
-    def remove_item(value):
+    def remove_item(self, value: int):
         item_to_remove = value - 1
         Cart.__items.pop(item_to_remove)
 

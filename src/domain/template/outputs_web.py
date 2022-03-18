@@ -1,5 +1,5 @@
 from random import randint
-from service.cart import cart
+from console import cart
 
 
 class Header:

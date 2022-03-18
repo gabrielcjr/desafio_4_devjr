@@ -1,5 +1,4 @@
 from typing import Union
-from template.outputs_web import StockCheck
 
 
 class SelectedProduct:
@@ -30,5 +29,7 @@ class SelectedProduct:
         stock: int = int(item_stock)
         if input_amount <= (stock - SelectedProduct.__MINIMAL_STOCK_AVAILABILITY):
             return True
+        from domain.template.outputs_web import StockCheck
+
         StockCheck.stock_not_available()
         exit(0)

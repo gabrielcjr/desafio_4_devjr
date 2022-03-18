@@ -1,11 +1,11 @@
 import sys
 import os
-from service.cart import cart
+from domain.service.cart import cart
 
 
-currentdir = f"{os.path.dirname(os.path.realpath(__file__))}/../../"
-parentdir = os.path.dirname(currentdir)
-sys.path.append(parentdir)
+# currentdir = f"{os.path.dirname(os.path.realpath(__file__))}/../../"
+# parentdir = os.path.dirname(currentdir)
+# sys.path.append(parentdir)
 import infrastructure.file.file as file
 
 
