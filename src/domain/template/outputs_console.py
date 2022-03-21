@@ -61,17 +61,17 @@ class CartPurchase:
         return print("Selecione o produto conforme a lista abaixo")
 
     @staticmethod
-    def keep_purchase(value, cart):
+    def keep_purchase(keep_purchase_input, cart):
         utils.clear()
-        if value == "n":
+        if keep_purchase_input == "n":
             CartPurchase.your_purchase()
             for item in cart:
-                
+
                 CartPurchase.purchase_details(
-                    
                     item["name"], item["amount"], item["price"], item["subtotal_price"]
                 )
             from domain.service.checkout import Checkout
+
             Checkout.place_order()
             CartPurchase.total_purchase(Checkout._total_purchase)
             exit(0)

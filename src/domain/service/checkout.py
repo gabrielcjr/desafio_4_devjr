@@ -4,19 +4,17 @@ from domain.service.cart import cart
 
 class Checkout:
 
-
     _total_purchase: float = 0
 
     @staticmethod
-    def calculate_total(value):
+    def calculate_total(cart_items):
         if Checkout._total_purchase == 0:
-            for item in value:
+            for item in cart_items:
                 Checkout._total_purchase += item["subtotal_price"]
 
-    
     @staticmethod
-    def adjust_stock(value):
-        for index, items in enumerate(value):
+    def adjust_stock(cart_items):
+        for index, items in enumerate(cart_items):
             cart_items = cart.items
             item = cart_items[index]
             file.UpdateStock.save_product_stock(
@@ -25,5 +23,6 @@ class Checkout:
 
     @staticmethod
     def place_order():
+        print(cart.items)
         Checkout.calculate_total(cart.items)
         Checkout.adjust_stock(cart.items)
