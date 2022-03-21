@@ -47,7 +47,7 @@ class TestProducts(unittest.TestCase):
         self.assertEqual(actual_result, expected_result)
 
     def test_stock_check(self):
-        print("test_stock_check")
+        print("test_stock_check1")
         actual_result = SelectedProduct._SelectedProduct__stock_check(
             self.amount, self.item_stock
         )
