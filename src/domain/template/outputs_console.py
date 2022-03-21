@@ -66,12 +66,10 @@ class CartPurchase:
         if keep_purchase_input == "n":
             CartPurchase.your_purchase()
             for item in cart:
-
                 CartPurchase.purchase_details(
                     item["name"], item["amount"], item["price"], item["subtotal_price"]
                 )
             from domain.service.checkout import Checkout
-
             Checkout.place_order()
             CartPurchase.total_purchase(Checkout._total_purchase)
             exit(0)
@@ -82,9 +80,8 @@ class CartPurchase:
 class InputsWarnings:
     @staticmethod
     def input_product():
-        from service.collection import products
-
-        return print("Por favor, escolha o produto entre 1 e %s" % str(len(products)))
+        from domain.service.collection import Collection
+        return print("Por favor, escolha o produto entre 1 e %s" % str(len(Collection.products)))
 
     @staticmethod
     def input_amount():

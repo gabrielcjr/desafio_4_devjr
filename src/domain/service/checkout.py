@@ -23,6 +23,5 @@ class Checkout:
 
     @staticmethod
     def place_order():
-        print(cart.items)
         Checkout.calculate_total(cart.items)
         Checkout.adjust_stock(cart.items)

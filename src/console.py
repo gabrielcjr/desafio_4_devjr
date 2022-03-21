@@ -17,13 +17,8 @@ def main():
 
     file.File.load_product_data()
 
-    
-
     while True:
-
-        # Iniciar o cart aqui
-        
-
+      
         Collection.load_products_list(Collection.products)
 
         outputs_console.List.products_list(Collection.products_list)

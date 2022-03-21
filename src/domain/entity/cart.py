@@ -6,10 +6,10 @@ class Cart:
 
     __items: List[Item] = []
 
-    def __init__(self, items: List = []) -> any:
+    def __init__(self, items: List = []) -> None:
         self.__items = items
 
-    def add_item(self, item: dict):
+    def add_item(self, item: Item):
         self.__items.append(item)
 
     def remove_item(self, value: int):
