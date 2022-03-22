@@ -19,12 +19,12 @@ def main():
 
     while True:
       
-        Collection.load_products_list(Collection.products)
+        Collection.load_products_list(Collection.products_list)
 
-        outputs_console.List.products_list(Collection.products_list)
+        outputs_console.List.products_list(Collection.products_dict)
 
         user_input_product: str = Inputs.input_product(
-            outputs_console.InputsQuestions.which_product(), Collection.products_list
+            outputs_console.InputsQuestions.which_product(), Collection.products_dict
         )
 
         user_input_amount: str = Inputs.input_amount(
@@ -37,7 +37,7 @@ def main():
         from domain.service.products import SelectedProduct
 
         validated_choice: dict = SelectedProduct.selected_product(
-            Collection.products_list, user_input_product, user_input_amount
+            Collection.products_dict, user_input_product, user_input_amount
         )
 
         cart.add_item(validated_choice)

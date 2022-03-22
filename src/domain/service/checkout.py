@@ -15,6 +15,7 @@ class Checkout:
     @staticmethod
     def adjust_stock(cart_items):
         for index, items in enumerate(cart_items):
+            print(cart_items)
             cart_items = cart.items
             item = cart_items[index]
             file.UpdateStock.save_product_stock(

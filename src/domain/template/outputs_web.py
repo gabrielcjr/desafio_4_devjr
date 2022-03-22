@@ -19,7 +19,7 @@ class List:
         return (
             (
                 f"<html><body>{Header.header()}<br>{List.list()}<br>"
-                + List.products_list(Collection.products_list)
+                + List.products_list(Collection.products_dict)
             )
             + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\

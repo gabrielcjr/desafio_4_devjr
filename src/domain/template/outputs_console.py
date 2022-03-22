@@ -81,7 +81,7 @@ class InputsWarnings:
     @staticmethod
     def input_product():
         from domain.service.collection import Collection
-        return print("Por favor, escolha o produto entre 1 e %s" % str(len(Collection.products)))
+        return print("Por favor, escolha o produto entre 1 e %s" % str(len(Collection.products_list)))
 
     @staticmethod
     def input_amount():

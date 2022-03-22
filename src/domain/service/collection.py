@@ -4,9 +4,9 @@ from typing import List
 
 class Collection:
 
-    products: List[Product] = []
+    products_list: List[Product] = []
 
-    products_list: dict = {}
+    products_dict: dict = {}
 
     @staticmethod
     def load_products_list(list: List[Product]) -> None:
@@ -17,7 +17,7 @@ class Collection:
 
     @classmethod
     def add_products(self, id: int, name: str, price: float, stock: int) -> None:
-        self.products_list[int(id)] = {
+        self.products_dict[int(id)] = {
             "name": name,
             "price": float(price),
             "stock": int(stock),
