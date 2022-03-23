@@ -16,6 +16,7 @@ class List:
     @staticmethod
     def list_products() -> str:
         from domain.service.collection import Collection
+
         return (
             (
                 f"<html><body>{Header.header()}<br>{List.list()}<br>"
