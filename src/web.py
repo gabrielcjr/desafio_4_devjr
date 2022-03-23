@@ -51,7 +51,9 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ("/cart/" + ID):
-            validated_choice: dict =  SelectedProduct.selected_product(Collection.products_dict, int(ID), 1)
+            validated_choice: dict = SelectedProduct.selected_product(
+                Collection.products_dict, int(ID), 1
+            )
             cart.add_item(validated_choice)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
@@ -66,8 +68,10 @@ class Server(BaseHTTPRequestHandler):
                 )
             else:
                 cart_items = __get_cookies()
-                for item in cart_items:      
-                    validated_choice: dict =  SelectedProduct.selected_product(Collection.products_dict, int(item), 1)
+                for item in cart_items:
+                    validated_choice: dict = SelectedProduct.selected_product(
+                        Collection.products_dict, int(item), 1
+                    )
                     cart.add_item(validated_choice)
                 self.wfile.write(
                     bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
