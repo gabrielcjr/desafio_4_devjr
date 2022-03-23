@@ -7,7 +7,7 @@ services:
       context: .
     container_name: desafio3-app
     entrypoint: python3 src/console.py
-    # volumes:
-    #   - .:/home/app/
+    volumes:
+      - .:/home/app/
     tty: true
-    stdin_open: true
+    stdin_open: true 
