@@ -1,5 +1,5 @@
-import infrastructure.file.file as file
 from domain.service.cart import cart
+import infrastructure.file.file as file
 
 
 class Checkout:
@@ -15,8 +15,6 @@ class Checkout:
     @staticmethod
     def adjust_stock(cart_items):
         for index, items in enumerate(cart_items):
-            print(cart_items)
-            cart_items = cart.items
             item = cart_items[index]
             file.UpdateStock.save_product_stock(
                 item["product"], item["available_stock"]

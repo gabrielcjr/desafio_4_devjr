@@ -42,48 +42,48 @@ class TestFile(unittest.TestCase):
         expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
         self.assertEqual(Collection.products_dict, expected_result)
 
-    def test_add_product_list(self):
-        print('test_add_product_list')
-        file.add_product_list(self.product_data)
-        expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 99}}
-        self.assertEqual(products.products, expected_result)
+    # def test_add_product_list(self):
+    #     print('test_add_product_list')
+    #     file.add_product_list(self.product_data)
+    #     expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 99}}
+    #     self.assertEqual(products.products, expected_result)
 
-    @mock.patch('file.add_product_list', return_value=['1', 'Microsserviços', '1.0', '99'])
-    def test_extrac_products_list(self, mock_extrac_products_list):
-        print('test_extrac_products_list')
-        file.extrac_products_list(self.product_line)
-        expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 99}}
-        self.assertEqual(products.products, expected_result)
+    # @mock.patch('file.add_product_list', return_value=['1', 'Microsserviços', '1.0', '99'])
+    # def test_extrac_products_list(self, mock_extrac_products_list):
+    #     print('test_extrac_products_list')
+    #     file.extrac_products_list(self.product_line)
+    #     expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 99}}
+    #     self.assertEqual(products.products, expected_result)
 
-    def test_read_products_list(self):
-        print('test_read_products_list')
-        file1 = open_file('r')
-        file.read_products_list(file1)
-        file1.close()
-        expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
-        self.assertEqual(products.products, expected_result)
+    # def test_read_products_list(self):
+    #     print('test_read_products_list')
+    #     file1 = open_file('r')
+    #     file.read_products_list(file1)
+    #     file1.close()
+    #     expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
+    #     self.assertEqual(products.products, expected_result)
 
-    @mock.patch('file.open_file', return_value=open_file('r'))
-    def test_load_product_data(self, mock_open_file):
-        print('test_load_product_data')
-        file.load_product_data()
-        expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
-        self.assertEqual(products.products, expected_result)
+    # @mock.patch('file.open_file', return_value=open_file('r'))
+    # def test_load_product_data(self, mock_open_file):
+    #     print('test_load_product_data')
+    #     file.load_product_data()
+    #     expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
+    #     self.assertEqual(products.products, expected_result)
 
-    @mock.patch('file.update_inventory', return_value=['1;Microsserviços;1.0;98;\n', '2;Kubernetes;2.0;99;\n', '3;Docker;3.0;99;\n', '4;Arquitetura;4.0;99;\n', '5;Comunicação;5.0;99;\n', '6;Observabilidade;6.0;99;\n'])
-    def test_save_product_inventory(self, mock_update_inventory):
-        print('test_save_product_inventory')
-        file.save_product_inventory(self.product, self.inventory)
-        actual_result = read_lines()
-        expected_result = ['1;Microsserviços;1.0;98;\n', '2;Kubernetes;2.0;99;\n', '3;Docker;3.0;99;\n', '4;Arquitetura;4.0;99;\n', '5;Comunicação;5.0;99;\n', '6;Observabilidade;6.0;99;\n']
-        self.assertEqual(actual_result, expected_result)
+    # @mock.patch('file.update_inventory', return_value=['1;Microsserviços;1.0;98;\n', '2;Kubernetes;2.0;99;\n', '3;Docker;3.0;99;\n', '4;Arquitetura;4.0;99;\n', '5;Comunicação;5.0;99;\n', '6;Observabilidade;6.0;99;\n'])
+    # def test_save_product_inventory(self, mock_update_inventory):
+    #     print('test_save_product_inventory')
+    #     file.save_product_inventory(self.product, self.inventory)
+    #     actual_result = read_lines()
+    #     expected_result = ['1;Microsserviços;1.0;98;\n', '2;Kubernetes;2.0;99;\n', '3;Docker;3.0;99;\n', '4;Arquitetura;4.0;99;\n', '5;Comunicação;5.0;99;\n', '6;Observabilidade;6.0;99;\n']
+    #     self.assertEqual(actual_result, expected_result)
 
-    @mock.patch('file.open_file', return_value=open_file('r'))
-    def test_read_lines(self, mock_open_file):
-        print('test_read_lines')
-        file.read_lines()
-        expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
-        self.assertEqual(products.products, expected_result)
+    # @mock.patch('file.open_file', return_value=open_file('r'))
+    # def test_read_lines(self, mock_open_file):
+    #     print('test_read_lines')
+    #     file.read_lines()
+    #     expected_result = {1: {'name': 'Microsserviços', 'price': 1.0, 'inventory': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'inventory': 99}, 3: {'name': 'Docker', 'price': 3.0, 'inventory': 99}, 4: {'name': 'Arquitetura', 'price': 4.0, 'inventory': 99}, 5: {'name': 'Comunicação', 'price': 5.0, 'inventory': 99}, 6: {'name': 'Observabilidade', 'price': 6.0, 'inventory': 99}}
+    #     self.assertEqual(products.products, expected_result)
 
 
 if __name__ == '__main__':

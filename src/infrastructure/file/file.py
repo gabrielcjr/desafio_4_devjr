@@ -3,14 +3,14 @@ from typing import Any, List
 from domain.service.collection import Collection
 from domain.entity.product import Product
 
+
 class File:
 
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
-    print(BASE_PATH)
 
     @classmethod
     def open_file(self, mode: str):
-        return open(f'{self.BASE_PATH}/_store_file.txt', mode)
+        return open(f"{self.BASE_PATH}/_store_file.txt", mode)
 
     @staticmethod
     def load_product_data() -> Any:
@@ -31,7 +31,6 @@ class File:
 
 
 class BuildProductList(File):
-
     def _read_products_list(file):
         lines = file.readlines()
         lines = lines[:]
@@ -53,15 +52,14 @@ class BuildProductList(File):
 
 
 class UpdateStock(File):
-
     @staticmethod
     def save_product_stock(product, stock):
-        lines = File._read_lines('r')
+        lines = File._read_lines("r")
         line = lines[product - 1]
         semicolon_pos_max = line.rfind(";") - 2
         new_line = line[:semicolon_pos_max] + str(stock) + ";\n"
         lines[product - 1] = new_line
-        UpdateStock.__update_stock(lines, 'w')
+        UpdateStock.__update_stock(lines, "w")
 
     def __update_stock(change, mode):
         file = File.open_file(mode)
