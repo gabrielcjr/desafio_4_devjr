@@ -32,4 +32,4 @@ class SelectedProduct:
         from domain.template.outputs_web import StockCheck
 
         StockCheck.stock_not_available()
-        exit(0) 
+        exit(0)
