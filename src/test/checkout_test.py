@@ -53,12 +53,12 @@ class TestInputs(unittest.TestCase):
     @mock.patch(
         "infrastructure.file.file.UpdateStock._UpdateStock__update_stock",
         return_value=[
-            "1;Microsserviços;1.0;98;\n",
+            "1;Microservices;1.0;98;\n",
             "2;Kubernetes;2.0;99;\n",
             "3;Docker;3.0;99;\n",
-            "4;Arquitetura;4.0;99;\n",
-            "5;Comunicação;5.0;99;\n",
-            "6;Observabilidade;6.0;99;\n",
+            "4;Architecture;4.0;99;\n",
+            "5;Communication;5.0;99;\n",
+            "6;Observability;6.0;99;\n",
         ],
     )
     def test_adjust_stock(self, mock_open_file):
@@ -66,12 +66,12 @@ class TestInputs(unittest.TestCase):
         actual_result = read_lines()
         Checkout.adjust_stock(self.cart_items)
         expected_result = [
-            "1;Microsserviços;1.0;98;\n",
+            "1;Microservices;1.0;98;\n",
             "2;Kubernetes;2.0;99;\n",
             "3;Docker;3.0;99;\n",
-            "4;Arquitetura;4.0;99;\n",
-            "5;Comunicação;5.0;99;\n",
-            "6;Observabilidade;6.0;99;\n",
+            "4;Architecture;4.0;99;\n",
+            "5;Communication;5.0;99;\n",
+            "6;Observability;6.0;99;\n",
         ]
         self.assertEqual(actual_result, expected_result)
 
