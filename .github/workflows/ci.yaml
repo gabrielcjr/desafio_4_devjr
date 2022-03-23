@@ -16,14 +16,14 @@ jobs:
       - name: Mypy - Check static typing
         run: docker-compose exec -T app pipenv run mypy src/**/*.py
 
-- name: Run tests
-  run: docker-compose exec -T app pipenv run test 
+      - name: Run tests
+        run: docker-compose exec -T app pipenv run test
 
-# - name: Run coverage
-#   run: docker-compose exec -T app pipenv run coverage
+      # - name: Run coverage
+      #   run: docker-compose exec -T app pipenv run coverage
 
-# - name: Run coverage report
-#   run: docker-compose exec -T app pipenv run coverageReport
+      # - name: Run coverage report
+      #   run: docker-compose exec -T app pipenv run coverageReport
 
-- name: Run lint
-  run: docker-compose exec -T app pipenv run flake8
+      - name: Run lint
+        run: docker-compose exec -T app pipenv run flake8
