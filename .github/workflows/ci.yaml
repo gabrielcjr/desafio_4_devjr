@@ -17,7 +17,7 @@ jobs:
         run: docker-compose exec -T app pipenv run mypy src/**/*.py
 
 - name: Run tests
-  run: docker-compose exec -T app pipenv run test
+  run: docker-compose exec -T app pipenv run test 
 
 # - name: Run coverage
 #   run: docker-compose exec -T app pipenv run coverage
