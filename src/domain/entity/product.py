@@ -1,15 +1,12 @@
+from dataclasses import dataclass
+
+@dataclass
 class Product:
 
     id: int
     name: str
     price: float
     stock: int
-
-    def __init__(self, id: int, name: str, price: float, stock: int = 0) -> None:
-        self.id = id
-        self.name = name
-        self.price = price
-        self.stock = stock
 
     def increment_stock(self, value):
         self.stock = self.stock + value
