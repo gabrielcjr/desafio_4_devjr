@@ -1,6 +1,7 @@
 import string
 from dataclasses import dataclass
 
+
 @dataclass()
 class Item:
 
@@ -10,5 +11,3 @@ class Item:
     subtotal_price: float
     amount: float
     available_stock: int
-
-
