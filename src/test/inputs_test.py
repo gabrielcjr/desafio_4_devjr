@@ -35,7 +35,7 @@ class TestInputs(unittest.TestCase):
     @mock.patch("domain.service.inputs.input", return_value="1")
     def test_select_amount(self, mock_which_amount):
         print("test_select_amount")
-        actual_result = Inputs.input_amount(self.input_amount)
+        actual_result = Inputs.input_quantity(self.input_amount)
         expected_result = 1
         self.assertEqual(actual_result, expected_result)
 

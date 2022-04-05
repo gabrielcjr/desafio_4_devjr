@@ -16,14 +16,14 @@ class Inputs:
                 outputs_console.InputsWarnings.input_product()
 
     @staticmethod
-    def input_amount(message: str) -> Union[float, None]:
-        amount_input: str = ""
-        while type(amount_input) != float:
-            amount_input = input(message)
-            if re.match("^[1-9]$", amount_input):
-                return float(amount_input)
+    def input_quantity(message: str) -> Union[float, None]:
+        quantity_input: str = ""
+        while type(quantity_input) != float:
+            quantity_input = input(message)
+            if re.match("^[1-9]$", quantity_input):
+                return float(quantity_input)
             else:
-                outputs_console.InputsWarnings.input_amount()
+                outputs_console.InputsWarnings.input_quantity()
 
     @staticmethod
     def input_keep_purchase(message: str) -> Union[str, None]:

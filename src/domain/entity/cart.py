@@ -1,5 +1,6 @@
 from typing import List
 from domain.entity.item import Item
+from domain.entity.product import Product
 
 
 class Cart:
@@ -9,8 +10,8 @@ class Cart:
     def __init__(self, items: List = []) -> None:
         self.__items = items
 
-    def add_item(self, item: Item):
-        self.__items.append(item)
+    def add_item(self, product: Product, quantity: int):
+        self.__items.append(Item(product, quantity))
 
     def remove_item(self, value: int):
         item_to_remove = value - 1

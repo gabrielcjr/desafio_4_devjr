@@ -1,3 +1,5 @@
+from domain.entity.item import Item
+from domain.entity.product import Product
 from domain.service.cart import cart
 from domain.service.collection import Collection
 from domain.service.inputs import Inputs
@@ -26,20 +28,18 @@ def main():
             outputs_console.InputsQuestions.which_product(), Collection.products_dict
         )
 
-        user_input_amount: str = Inputs.input_amount(
-            outputs_console.InputsQuestions.which_amount()
+        user_input_quantity: str = Inputs.input_quantity(
+            outputs_console.InputsQuestions.which_quantity()
         )
 
         user_input_keep_purchase: str = Inputs.input_keep_purchase(
             outputs_console.InputsQuestions.keep_purchase()
         )
-        from domain.service.products import SelectedProduct
 
-        validated_choice: dict = SelectedProduct.selected_product(
-            Collection.products_dict, user_input_product, user_input_amount
-        )
+        validated_choice: list = Product(user_input_product, Collection.products_dict[user_input_product]['name'], Collection.products_dict[user_input_product]['price'], Collection.products_dict[user_input_product]['stock'])
 
-        cart.add_item(validated_choice)
+
+        cart.add_item(validated_choice, user_input_quantity)
 
         outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.items)
 

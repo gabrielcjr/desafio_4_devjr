@@ -1,3 +1,4 @@
+from domain.service.products import SelectedProduct
 from domain.service.utils import utils
 
 
@@ -28,7 +29,7 @@ class InputsQuestions:
         return "\nQual produto você gostaria de comprar?\n"
 
     @staticmethod
-    def which_amount():
+    def which_quantity():
         return "Qual a quantidade deste produto deseja comprar? \n"
 
     @staticmethod
@@ -46,10 +47,10 @@ class CartPurchase:
         )
 
     @staticmethod
-    def purchase_details(name, amount, price, subtotal):
+    def purchase_details(name, quantity, price, subtotal):
         return print(
             "     Item: %s, quantidade %.0f, valor unitário %.2f, subtotal %.2f"
-            % (name, amount, price, subtotal)
+            % (name, quantity, price, subtotal)
         )
 
     @staticmethod
@@ -62,12 +63,13 @@ class CartPurchase:
 
     @staticmethod
     def keep_purchase(keep_purchase_input, cart):
-        utils.clear()
+        # utils.clear()
         if keep_purchase_input == "n":
             CartPurchase.your_purchase()
-            for item in cart:
+            for index, item  in enumerate(cart):
+                SelectedProduct.stock_check(cart[index].get_quantity, cart[index].get_product.get_stock)
                 CartPurchase.purchase_details(
-                    item["name"], item["amount"], item["price"], item["subtotal_price"]
+                    cart[index].get_product.get_name, cart[index].get_quantity, cart[index].get_product.get_price, cart[index].subtotal
                 )
             from domain.service.checkout import Checkout
             Checkout.place_order()
@@ -84,7 +86,7 @@ class InputsWarnings:
         return print("Por favor, escolha o produto entre 1 e %s" % str(len(Collection.products_list)))
 
     @staticmethod
-    def input_amount():
+    def input_quantity():
         return print("Por favor, escolha uma quantidade até 9 itens")
 
     @staticmethod

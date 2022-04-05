@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Product:
 
     id: int
@@ -16,3 +16,19 @@ class Product:
         if new_stock < 0:
             raise Exception("Stock must be greater or equal than 0")
         self.stock = self.stock - value
+
+    @property
+    def get_id(self):
+        return self.id
+
+    @property
+    def get_name(self):
+        return self.name
+
+    @property
+    def get_price(self):
+        return self.price
+
+    @property
+    def get_stock(self):
+        return self.stock
