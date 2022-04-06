@@ -1,3 +1,4 @@
+from domain.entity.product import Product
 from domain.service.collection import Collection
 from domain.service.cart import cart
 from domain.service.checkout import Checkout
@@ -36,7 +37,8 @@ class Server(BaseHTTPRequestHandler):
 
         def __create_cookie():
             cart_items = cart.items
-            return "".join(str(item["product"]) + "," for item in cart_items)
+            # print(cart.items[int(ID)-1].get_product.get_id)
+            return "".join(str(cart.items[index].get_product.get_id) + "," for index, item in enumerate(cart_items))
 
         def __get_cookies():
             get_cookie = cookies.SimpleCookie(self.headers.get("Cookie"))
@@ -51,10 +53,9 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ("/cart/" + ID):
-            validated_choice: dict = SelectedProduct.selected_product(
-                Collection.products_dict, int(ID), 1
-            )
-            cart.add_item(validated_choice)
+            validated_choice: list = Product(int(ID), Collection.products_dict[int(ID)]['name'], Collection.products_dict[int(ID)]['price'], Collection.products_dict[int(ID)]['stock'])
+            cart.add_item(validated_choice, 1)
+            # print(cart.items[int(ID)-1].get_product.get_id)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
@@ -69,10 +70,8 @@ class Server(BaseHTTPRequestHandler):
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
-                    validated_choice: dict = SelectedProduct.selected_product(
-                        Collection.products_dict, int(item), 1
-                    )
-                    cart.add_item(validated_choice)
+                    validated_choice: list = Product(int(item), Collection.products_dict[int(item)]['name'], Collection.products_dict[int(item)]['price'], Collection.products_dict[int(item)]['stock'])
+                    cart.add_item(validated_choice, 1)
                 self.wfile.write(
                     bytes(outputs_web.CartPurchase.current_cart(), "utf-8")
                 )

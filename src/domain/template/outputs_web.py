@@ -48,12 +48,13 @@ class CartPurchase:
 
     @staticmethod
     def purchase_details(value):
+        print(value)
         result = ""
         for index, item in enumerate(value):
             item = value[index]
             result += (
-                "<br>     Item: %s, amount %.0f, unit price %.2f, subtotal %.2f <br>"
-                % (item["name"], item["amount"], item["price"], item["subtotal_price"])
+                "<br>     Item: %s, quantity %.0f, unit price %.2f, subtotal %.2f <br>"
+                % (item.get_product.get_name, item.get_quantity, item.get_product.get_price, item.subtotal)
             )
         return result
 
