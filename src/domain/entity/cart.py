@@ -1,7 +1,7 @@
+from dataclasses import dataclass
 from typing import List
 from domain.entity.item import Item
 from domain.entity.product import Product
-
 
 class Cart:
 

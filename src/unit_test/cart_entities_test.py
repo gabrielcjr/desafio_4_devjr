@@ -1,9 +1,13 @@
-from dataclasses import FrozenInstanceError, dataclass, is_dataclass
+import os
+import sys
 import unittest
-from datetime import datetime
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+from domain.entity.item import Item
 from domain.entity.product import Product
 from domain.entity.cart import Cart
-from src.domain.entity.item import Item
+
 
 
 class TestCartUnit(unittest.TestCase):
@@ -16,13 +20,6 @@ class TestCartUnit(unittest.TestCase):
         self.assertEqual(cart.items.product.get_price, 1.0)
         self.assertEqual(cart.items.product.get_stock, 99)
         self.assertEqual(cart.items.get_quantity, 1)
-
-    # def test_if_created_at_is_generated_in_constructor(self):
-    #     category1 = Category(name="Movie 1")
-    #     category2 = Category(name="Movie 2")
-    #     self.assertNotEqual(
-    #         category1.created_at.timestamp(), category2.created_at.timestamp()
-    #     )
 
     # def test_is_immutable(self):
     #     with self.assertRaises(FrozenInstanceError) as assert_error:
