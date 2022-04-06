@@ -1,11 +1,10 @@
 import re
-from typing import Union
 import domain.template.outputs_console as outputs_console
 
 
 class Inputs:
     @staticmethod
-    def input_product(message: str, products_list: dict) -> Union[int, None]:
+    def input_product(message: str, products_list: dict) -> int | None:
         product_input: str = ""
         while type(product_input) != int:
             product_input = input(message)
@@ -16,17 +15,17 @@ class Inputs:
                 outputs_console.InputsWarnings.input_product()
 
     @staticmethod
-    def input_quantity(message: str) -> Union[float, None]:
+    def input_quantity(message: str) -> int | None:
         quantity_input: str = ""
         while type(quantity_input) != float:
             quantity_input = input(message)
             if re.match("^[1-9]$", quantity_input):
-                return float(quantity_input)
+                return int(quantity_input)
             else:
                 outputs_console.InputsWarnings.input_quantity()
 
     @staticmethod
-    def input_keep_purchase(message: str) -> Union[str, None]:
+    def input_keep_purchase(message: str) -> str | None:
         input_option: str = ""
         while input_option != ["n", "s"]:
             input_option = input(message)

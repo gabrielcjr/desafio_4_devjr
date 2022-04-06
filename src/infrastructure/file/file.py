@@ -9,18 +9,18 @@ class File:
     BASE_PATH = os.path.abspath(os.path.dirname(__file__))
 
     @classmethod
-    def open_file(self, mode: str):
-        return open(f"{self.BASE_PATH}/_store_file.txt", mode)
+    def open_file(cls, mode: str):
+        return open(f"{cls.BASE_PATH}/_store_file.txt", mode)
 
     @staticmethod
-    def load_product_data() -> Any:
+    def load_product_data() -> None:
         file = File.open_file("r")
         BuildProductList._read_products_list(file)
         file.close()
 
     @classmethod
-    def _read_lines(self, mode: str) -> List:
-        file = self.open_file(mode)
+    def _read_lines(cls, mode: str) -> List:
+        file = cls.open_file(mode)
         lines = file.readlines()
         file.close()
         return lines

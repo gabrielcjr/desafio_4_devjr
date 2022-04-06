@@ -2,7 +2,6 @@ from domain.entity.product import Product
 from domain.service.collection import Collection
 from domain.service.cart import cart
 from domain.service.checkout import Checkout
-from domain.service.products import SelectedProduct
 import infrastructure.file.file as file
 import domain.template.outputs_web as outputs_web
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -53,7 +52,7 @@ class Server(BaseHTTPRequestHandler):
             self.wfile.write(bytes(outputs_web.List.list_products(), "utf-8"))
 
         if self.path == ("/cart/" + ID):
-            validated_choice: list = Product(int(ID), Collection.products_dict[int(ID)]['name'], Collection.products_dict[int(ID)]['price'], Collection.products_dict[int(ID)]['stock'])
+            validated_choice: Product = Product(int(ID), Collection.products_dict[int(ID)]['name'], Collection.products_dict[float(ID)]['price'], Collection.products_dict[int(ID)]['stock'])
             cart.add_item(validated_choice, 1)
             # print(cart.items[int(ID)-1].get_product.get_id)
             cart_items_cookie = __create_cookie()
@@ -70,7 +69,7 @@ class Server(BaseHTTPRequestHandler):
             else:
                 cart_items = __get_cookies()
                 for item in cart_items:
-                    validated_choice: list = Product(int(item), Collection.products_dict[int(item)]['name'], Collection.products_dict[int(item)]['price'], Collection.products_dict[int(item)]['stock'])
+                    validated_choice: Product = Product(int(item), Collection.products_dict[int(item)]['name'], Collection.products_dict[int(item)]['price'], Collection.products_dict[int(item)]['stock'])
                     cart.add_item(validated_choice, 1)
                 self.wfile.write(
                     bytes(outputs_web.CartPurchase.current_cart(), "utf-8")

@@ -42,5 +42,7 @@ RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
     echo 'HISTFILE=/home/python/zsh/.zsh_history' >> ~/.zshrc && \
     echo 'export GPG_TTY=$(tty)' >> ~/.zshrc
 
+RUN export MYPYPATH=/home/app/src
+
 RUN pipenv sync --dev --pre
 

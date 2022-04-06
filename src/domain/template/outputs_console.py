@@ -14,7 +14,7 @@ class List:
         return print("Lista de produtos da loja \n")
 
     @staticmethod
-    def products_list(items: list) -> None:
+    def products_list(items: dict) -> None:
         list_products: str = ""
         for product in items:
             name: str = items[product]["name"]

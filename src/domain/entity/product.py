@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-@dataclass(frozen=True)
+@dataclass()
 class Product:
 
     id: int
@@ -8,8 +8,8 @@ class Product:
     price: float
     stock: int
 
-    def increment_stock(self, value):
-        self.stock = self.stock + value
+    def increment_stock(self, value: int):
+        self.stock: int = self.stock + value
 
     def decrement_stock(self, value):
         new_stock = self.stock - value
