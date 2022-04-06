@@ -8,7 +8,6 @@ class Checkout:
 
     @staticmethod
     def calculate_total(cart_items):
-        print(cart_items)
         if Checkout._total_purchase == 0:
             for index, item in enumerate(cart_items):
                 Checkout._total_purchase += cart_items[index].subtotal
