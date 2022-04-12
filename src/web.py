@@ -36,7 +36,6 @@ class Server(BaseHTTPRequestHandler):
 
         def __create_cookie():
             cart_items = cart.items
-            # print(cart.items[int(ID)-1].get_product.get_id)
             return "".join(str(cart.items[index].get_product.get_id) + "," for index, item in enumerate(cart_items))
 
         def __get_cookies():
@@ -54,7 +53,6 @@ class Server(BaseHTTPRequestHandler):
         if self.path == ("/cart/" + ID):
             validated_choice: Product = Product(int(ID), Collection.products_dict[int(ID)]['name'], Collection.products_dict[float(ID)]['price'], Collection.products_dict[int(ID)]['stock'])
             cart.add_item(validated_choice, 1)
-            # print(cart.items[int(ID)-1].get_product.get_id)
             cart_items_cookie = __create_cookie()
             C.set("item", cart_items_cookie, cart_items_cookie)
             __response_header_with_cookie()
@@ -85,7 +83,6 @@ class Server(BaseHTTPRequestHandler):
             Checkout.adjust_stock(cart.items)
             __response_header()
             Checkout._total_purchase = 0
-            # cart.set_cart_items([])
             self.wfile.write(bytes(outputs_web.Success.success_msg(), "utf-8"))
 
 

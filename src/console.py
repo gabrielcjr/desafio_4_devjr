@@ -24,19 +24,19 @@ def main():
 
         outputs_console.List.products_list(Collection.products_dict)
 
-        user_input_product: int = Inputs.input_product(
+        user_input_product: int | None = Inputs.input_product(
             outputs_console.InputsQuestions.which_product(), Collection.products_dict
         )
 
-        user_input_quantity: int = Inputs.input_quantity(
+        user_input_quantity: int | None = Inputs.input_quantity(
             outputs_console.InputsQuestions.which_quantity()
         )
 
-        user_input_keep_purchase: str = Inputs.input_keep_purchase(
+        user_input_keep_purchase: str | None = Inputs.input_keep_purchase(
             outputs_console.InputsQuestions.keep_purchase()
         )
 
-        validated_choice: Product = Product(user_input_product, Collection.products_dict[user_input_product]['name'], Collection.products_dict[user_input_product]['price'], Collection.products_dict[user_input_product]['stock'])
+        validated_choice: Product | None = Product(user_input_product, Collection.products_dict[user_input_product]['name'], Collection.products_dict[user_input_product]['price'], Collection.products_dict[user_input_product]['stock'])
 
 
         cart.add_item(validated_choice, user_input_quantity)
