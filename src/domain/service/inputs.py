@@ -1,10 +1,11 @@
 import re
+from typing import Any
 import domain.template.outputs_console as outputs_console
 
 
 class Inputs:
     @staticmethod
-    def input_product(message: str, products_list: dict) -> int | None:
+    def input_product(message: str, products_list: dict) -> int | Any:
         product_input: str = ""
         while type(product_input) != int:
             product_input = input(message)
@@ -15,7 +16,7 @@ class Inputs:
                 outputs_console.InputsWarnings.input_product()
 
     @staticmethod
-    def input_quantity(message: str) -> int | None:
+    def input_quantity(message: str) -> int | Any:
         quantity_input: str = ""
         while type(quantity_input) != float:
             quantity_input = input(message)
@@ -25,7 +26,7 @@ class Inputs:
                 outputs_console.InputsWarnings.input_quantity()
 
     @staticmethod
-    def input_keep_purchase(message: str) -> str | None:
+    def input_keep_purchase(message: str) -> str | Any:
         input_option: str = ""
         while input_option != ["n", "s"]:
             input_option = input(message)

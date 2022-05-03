@@ -66,7 +66,7 @@ class CartPurchase:
         utils.clear()
         if keep_purchase_input == "n":
             CartPurchase.your_purchase()
-            for index, item  in enumerate(cart):
+            for index, item in enumerate(cart):
                 SelectedProduct.stock_check(cart[index].get_quantity, cart[index].get_product.get_stock)
                 CartPurchase.purchase_details(
                     cart[index].get_product.get_name, cart[index].get_quantity, cart[index].get_product.get_price, cart[index].subtotal

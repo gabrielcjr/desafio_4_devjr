@@ -9,7 +9,6 @@ from domain.entity.product import Product
 from domain.entity.cart import Cart
 
 
-
 class TestCartUnit(unittest.TestCase):
 
     def test_constructor(self):
@@ -25,6 +24,7 @@ class TestCartUnit(unittest.TestCase):
     #     with self.assertRaises(FrozenInstanceError) as assert_error:
     #         value_object = Category(name='test')
     #         value_object.name = 'fake name'
+
 
 if __name__ == "__main__":
     unittest.main()

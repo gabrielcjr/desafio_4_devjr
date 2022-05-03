@@ -1,6 +1,6 @@
 name: Test pipeline
 on:
-  pull_request:
+  push:
     branches: [master]
 
 jobs:
@@ -13,14 +13,14 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
 
-      - name: Mypy - Check static typing
-        run: docker-compose exec -T app pipenv run mypy src/**/*.py
+      - name: Pyright - Check static typing
+        run: docker-compose exec -T app pipenv run pyright
 
-      - name: Run coverage
-        run: docker-compose exec -T app pipenv run coverage
+      # - name: Run coverage
+      #   run: docker-compose exec -T app pipenv run coverage
 
-      - name: Run coverage report
-        run: docker-compose exec -T app pipenv run coverageReport
+      # - name: Run coverage report
+      #   run: docker-compose exec -T app pipenv run coverageReport
 
       - name: Run lint
         run: docker-compose exec -T app pipenv run flake8

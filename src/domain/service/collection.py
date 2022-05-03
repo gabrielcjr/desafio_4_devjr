@@ -14,6 +14,7 @@ class Collection:
             Collection.add_products(
                 list[index].id, list[index].name, list[index].price, list[index].stock
             )
+
     @classmethod
     def add_products(cls, id: int, name: str, price: float, stock: int) -> None:
         cls.products_dict[int(id)] = {
