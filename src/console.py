@@ -38,7 +38,9 @@ def main():
 
         validated_choice: Product | None = Product(user_input_product, Collection.products_dict[user_input_product]['name'], Collection.products_dict[user_input_product]['price'], Collection.products_dict[user_input_product]['stock'])
 
-        cart.add_item(validated_choice, user_input_quantity)
+        new_item = Item(validated_choice, user_input_quantity)
+
+        cart.add_item(new_item)
 
         outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.items)
 

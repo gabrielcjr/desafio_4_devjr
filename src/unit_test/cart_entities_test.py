@@ -12,18 +12,48 @@ from domain.entity.cart import Cart
 class TestCartUnit(unittest.TestCase):
 
     def test_constructor(self):
-        cart = Cart(Item(Product(1, 'Microservices', 1.0, 99), 1))
-
+        product1 = Product(1, 'Microservices', 1.0, 99)
+        item1 = Item(product1, 1)
+        cart = Cart(item1)
         self.assertEqual(cart.items.product.get_id, 1)
         self.assertEqual(cart.items.product.get_name, "Microservices")
         self.assertEqual(cart.items.product.get_price, 1.0)
         self.assertEqual(cart.items.product.get_stock, 99)
         self.assertEqual(cart.items.get_quantity, 1)
 
-    # def test_is_immutable(self):
-    #     with self.assertRaises(FrozenInstanceError) as assert_error:
-    #         value_object = Category(name='test')
-    #         value_object.name = 'fake name'
+    def test_add_item(self):
+        cart = Cart()
+        product1 = Product(1, 'Microservices', 1.0, 99)
+        item1 = Item(product1, 1)
+        cart.add_item(item1)
+        product2 = Product(2, "Kubernetes", 2.0, 99)
+        item2 = Item(product2, 1)
+        cart.add_item(item2)
+
+        self.assertEqual(cart.items[1].product.get_id, 2)
+        self.assertEqual(cart.items[1].product.get_name, "Kubernetes")
+        self.assertEqual(cart.items[1].product.get_price, 2.0)
+        self.assertEqual(cart.items[1].product.get_stock, 99)
+        self.assertEqual(cart.items[1].get_quantity, 1)
+
+    def test_remove_item(self):
+        cart = Cart()
+        product1 = Product(1, 'Microservices', 1.0, 99)
+        item1 = Item(product1, 1)
+        cart.add_item(item1)
+        product2 = Product(2, "Kubernetes", 2.0, 99)
+        item2 = Item(product2, 1)
+        cart.add_item(item2)
+        product3 = Product(3, "Docker", 3.0, 99)
+        item3 = Item(product2, 1)
+        cart.add_item(item3)
+        cart.remove_item(1)
+        
+        self.assertEqual(cart.items[0].product.get_id, 2)
+        self.assertEqual(cart.items[0].product.get_name, "Kubernetes")
+        self.assertEqual(cart.items[0].product.get_price, 2.0)
+        self.assertEqual(cart.items[0].product.get_stock, 99)
+        self.assertEqual(cart.items[0].get_quantity, 1)
 
 
 if __name__ == "__main__":

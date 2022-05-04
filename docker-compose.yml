@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: .docker/Dockerfile
       context: .
-    container_name: desafio3-app
+    container_name: desafio4-app
     entrypoint: python3 src/console.py
     # volumes:
     #   - .:/home/app/
