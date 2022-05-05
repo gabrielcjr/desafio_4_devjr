@@ -20,5 +20,3 @@ class Item:
     @property
     def get_quantity(self):
         return self.quantity
-
-    

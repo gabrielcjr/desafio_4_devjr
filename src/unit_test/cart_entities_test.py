@@ -15,6 +15,7 @@ class TestCartUnit(unittest.TestCase):
         product1 = Product(1, 'Microservices', 1.0, 99)
         item1 = Item(product1, 1)
         cart = Cart(item1)
+
         self.assertEqual(cart.items.product.get_id, 1)
         self.assertEqual(cart.items.product.get_name, "Microservices")
         self.assertEqual(cart.items.product.get_price, 1.0)
@@ -45,10 +46,10 @@ class TestCartUnit(unittest.TestCase):
         item2 = Item(product2, 1)
         cart.add_item(item2)
         product3 = Product(3, "Docker", 3.0, 99)
-        item3 = Item(product2, 1)
+        item3 = Item(product3, 1)
         cart.add_item(item3)
         cart.remove_item(1)
-        
+
         self.assertEqual(cart.items[0].product.get_id, 2)
         self.assertEqual(cart.items[0].product.get_name, "Kubernetes")
         self.assertEqual(cart.items[0].product.get_price, 2.0)
