@@ -43,12 +43,9 @@ class TestProducts(unittest.TestCase):
         self.assertEqual(actual_result, expected_result)
 
         with self.assertRaises(SystemExit):
-            actual_result = SelectedProduct.stock_check(
-            self.invalid_amount, self.item_stock
-            )
+            actual_result = SelectedProduct.stock_check(self.invalid_amount, self.item_stock)
 
         self.assertEqual(SelectedProduct._SelectedProduct__MINIMAL_STOCK_AVAILABILITY, 10)
-
 
 
 if __name__ == "__main__":
