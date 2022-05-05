@@ -18,7 +18,7 @@ RUN apt update && apt install -y  --no-install-recommends \
 
 RUN useradd -ms /bin/bash python
 
-USER python
+# USER python
 
 WORKDIR /home/app
 
