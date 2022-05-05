@@ -16,6 +16,9 @@ jobs:
       - name: Pyright - Check static typing
         run: docker-compose exec -T app pipenv run pyright
 
+      - name: Run tests
+        run: docker-compose exec -T app pipenv run test
+
       - name: Run coverage
         run: docker-compose exec -T app pipenv run coverage
 
