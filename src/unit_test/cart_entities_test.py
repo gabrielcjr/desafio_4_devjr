@@ -12,6 +12,7 @@ from domain.entity.cart import Cart
 class TestCartUnit(unittest.TestCase):
 
     def test_constructor(self):
+        print("test_constructor")
         product1 = Product(1, 'Microservices', 1.0, 99)
         item1 = Item(product1, 1)
         cart = Cart(item1)
@@ -23,6 +24,7 @@ class TestCartUnit(unittest.TestCase):
         self.assertEqual(cart.items.get_quantity, 1)
 
     def test_add_item(self):
+        print("test_add_item")
         cart = Cart()
         product1 = Product(1, 'Microservices', 1.0, 99)
         item1 = Item(product1, 1)
@@ -38,6 +40,7 @@ class TestCartUnit(unittest.TestCase):
         self.assertEqual(cart.items[1].get_quantity, 1)
 
     def test_remove_item(self):
+        print("test_remove_item")
         cart = Cart()
         product1 = Product(1, 'Microservices', 1.0, 99)
         item1 = Item(product1, 1)

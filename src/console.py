@@ -41,6 +41,7 @@ def main():
         new_item = Item(validated_choice, user_input_quantity)
 
         cart.add_item(new_item)
+        print(cart.items)
 
         outputs_console.CartPurchase.keep_purchase(user_input_keep_purchase, cart.items)
 

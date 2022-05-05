@@ -11,6 +11,7 @@ from domain.entity.item import Item
 class TestCartUnit(unittest.TestCase):
 
     def test_constructor(self):
+        print("test_constructor")
         item = Item(Product(1, 'Microservices', 2.0, 99), 2)
 
         self.assertEqual(item.product.get_id, 1)

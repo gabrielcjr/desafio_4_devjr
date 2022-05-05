@@ -32,7 +32,7 @@ class List:
         for product in dict:
             name: str = dict[product]["name"]
             price: float = dict[product]["price"]
-            list_products += '<a href="cart\%s">%s - %s $ %.2f</a><br>' % (  # type: ignore
+            list_products += '<a href="cart\%s">%s - %s $ %.2f</a><br>' % (  # type: ignore 
                 product,
                 product,
                 name,
