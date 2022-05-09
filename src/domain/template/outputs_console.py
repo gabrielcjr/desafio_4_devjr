@@ -63,7 +63,7 @@ class CartPurchase:
 
     @staticmethod
     def keep_purchase(keep_purchase_input, cart):
-        # utils.clear()
+        utils.clear()
         if keep_purchase_input == "n":
             CartPurchase.your_purchase()
             for index, item in enumerate(cart):

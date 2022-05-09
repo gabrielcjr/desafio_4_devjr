@@ -51,7 +51,7 @@ class BuildProductList(File):
         name: str = product_data[1]
         price: float = float(product_data[2])
         stock: int = int(product_data[3])
-        Collection.products_list.append(Product(id, name, price, stock))
+        Collection.products_list.append(Product(id, name, price, stock))  # type: ignore
 
 
 class UpdateStock(File):
