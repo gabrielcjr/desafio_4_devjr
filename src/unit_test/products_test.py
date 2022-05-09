@@ -1,4 +1,4 @@
-import unittest
+import pytest
 import sys
 import os
 from unittest import mock
@@ -9,8 +9,8 @@ sys.path.append(parentdir)
 from domain.service.products import SelectedProduct
 
 
-class TestProducts(unittest.TestCase):
-    def setUp(self):
+class TestProducts:
+    def setup_class(self):
         print("setUp")
         self.products = {
             1: {"name": "Microservices", "price": 1.0, "stock": 99},
@@ -40,13 +40,12 @@ class TestProducts(unittest.TestCase):
             self.valid_amount, self.item_stock
         )
         expected_result = True
-        self.assertEqual(actual_result, expected_result)
+        assert actual_result == expected_result
 
-        with self.assertRaises(SystemExit):
+        with pytest.raises(SystemExit):
             actual_result = SelectedProduct.stock_check(self.invalid_amount, self.item_stock)
 
-        self.assertEqual(SelectedProduct._SelectedProduct__MINIMAL_STOCK_AVAILABILITY, 10)
+        assert SelectedProduct._SelectedProduct__MINIMAL_STOCK_AVAILABILITY == 10
 
-
-if __name__ == "__main__":
-    unittest.main()
+# if __name__ == "__main__":
+#     unittest.main()

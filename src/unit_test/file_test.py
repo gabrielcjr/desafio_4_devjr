@@ -1,4 +1,4 @@
-import unittest
+import pytest
 from unittest import mock
 import os
 import sys
@@ -27,8 +27,8 @@ def read_lines():
     return lines
 
 
-class TestFile(unittest.TestCase):
-    def setUp(self):
+class TestFile:
+    def setup_class(self):
         self.product_data = ["1", "Microsservices", "1.0", "99"]
         self.product_line = "1;Microsservices;1.0;99;"
         self.product = 1
@@ -99,7 +99,3 @@ class TestFile(unittest.TestCase):
     #     file.read_lines()
     #     expected_result = {1: {'name': 'Microsservices', 'price': 1.0, 'stock': 98}, 2: {'name': 'Kubernetes', 'price': 2.0, 'stock': 99}, 3: {'name': 'Docker', 'price': 3.0, 'stock': 99}, 4: {'name': 'Architecture', 'price': 4.0, 'stock': 99}, 5: {'name': 'Communication', 'price': 5.0, 'stock': 99}, 6: {'name': 'Observability', 'price': 6.0, 'stock': 99}}
     #     self.assertEqual(products.products, expected_result)
-
-
-if __name__ == "__main__":
-    unittest.main()

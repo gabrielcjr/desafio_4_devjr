@@ -10,7 +10,7 @@ from domain.service.inputs import Inputs
 
 
 class TestInputs(unittest.TestCase):
-    def setUp(self):
+    def setup_class(self):
         print("setUp")
         self.input_product = 1
         self.input_amount = 1
