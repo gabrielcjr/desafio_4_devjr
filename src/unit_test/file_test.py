@@ -6,7 +6,7 @@ import sys
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
-from infrastructure.file.file import File, BuildProductList, UpdateStock
+from infrastructure.file.file import ProductFileReader, BuildProductList, ProductFileWriter
 from domain.service.collection import Collection
 
 BASE_PATH = os.path.abspath(os.path.dirname(__file__))

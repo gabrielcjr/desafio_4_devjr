@@ -5,7 +5,7 @@ import domain.template.outputs_console as outputs_console
 
 class Inputs:
     @staticmethod
-    def input_product(message: str, products_list: dict) -> int | Any:
+    def input_product(message: str, products_list: list) -> int | Any:
         product_input: str = ""
         while type(product_input) != int:
             product_input = input(message)

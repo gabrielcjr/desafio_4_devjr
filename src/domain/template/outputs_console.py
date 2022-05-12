@@ -14,12 +14,13 @@ class List:
         return print("Lista de produtos da loja \n")
 
     @staticmethod
-    def products_list(items: dict) -> None:
+    def products_list(items: list) -> None:
         list_products: str = ""
-        for product in items:
-            name: str = items[product]["name"]
-            price: float = items[product]["price"]
-            list_products += "%s - %s R$ %.2f\n" % (product, name, price)
+        for index, product in enumerate(items):
+            name: str = product.get_name
+            price: float = product.get_price
+            id: str = product.get_id
+            list_products += "%s - %s R$ %.2f\n" % (id, name, price)
         return print(list_products)
 
 
@@ -63,7 +64,7 @@ class CartPurchase:
 
     @staticmethod
     def keep_purchase(keep_purchase_input, cart):
-        utils.clear()
+        # utils.clear()
         if keep_purchase_input == "n":
             CartPurchase.your_purchase()
             for index, item in enumerate(cart):
@@ -82,8 +83,8 @@ class CartPurchase:
 class InputsWarnings:
     @staticmethod
     def input_product():
-        from domain.service.collection import Collection
-        return print("Por favor, escolha o produto entre 1 e %s" % str(len(Collection.products_list)))
+        from console import all_products
+        return print("Por favor, escolha o produto entre 1 e %s" % str(len(all_products)))
 
     @staticmethod
     def input_quantity():

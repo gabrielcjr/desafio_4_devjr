@@ -11,7 +11,7 @@ from random import seed
 HOST = "0.0.0.0"
 PORT = 8080
 
-file.File.load_product_data()
+file.ProductFileReader.load_product_data()
 
 Collection.load_products_list(Collection.products_list)
 

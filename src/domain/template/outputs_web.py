@@ -15,11 +15,11 @@ class List:
 
     @staticmethod
     def list_products() -> str:
-        from domain.service.collection import Collection
+        from console import all_products
         return (
             (
                 f"<html><body>{Header.header()}<br>{List.list()}<br>"
-                + List.products_list(Collection.products_dict)
+                + List.products_list(all_products)
             )
             + '<br>\
                 <a href="http://localhost:8080/cart/">Cart</a>\
