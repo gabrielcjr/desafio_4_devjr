@@ -16,7 +16,7 @@ class Checkout:
     def adjust_stock(cart_items):
         for index, items in enumerate(cart_items):
             item = cart_items[index]
-            file.UpdateStock.save_product_stock(
+            file.ProductFileWriter.save_product_stock(
                 item.get_product.get_id, item.get_product.get_stock - int(item.get_quantity)
             )
 

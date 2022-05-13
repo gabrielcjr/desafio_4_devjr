@@ -37,7 +37,7 @@ def main():
         )
 
         validated_choice: Product | None = Product(
-            user_input_product - 1, 
+            user_input_product, 
             all_products[user_input_product - 1].get_name, 
             all_products[user_input_product - 1].get_price, 
             all_products[user_input_product - 1].get_stock

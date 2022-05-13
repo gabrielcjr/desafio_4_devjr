@@ -39,7 +39,7 @@ class ProductFileReader:
         file.close()
         return lines
 
-class UpdateStock():
+class ProductFileWriter():
     @staticmethod
     def save_product_stock(product: int, stock: int) -> None:
         lines: list = ProductFileReader.load_lines()
@@ -47,7 +47,7 @@ class UpdateStock():
         semicolon_pos_max = line.rfind(";") - 2
         new_line = line[:semicolon_pos_max] + str(stock) + ";\n"
         lines[product - 1] = new_line
-        UpdateStock.__update_stock(lines, "w")
+        ProductFileWriter.__update_stock(lines, "w")
 
     @classmethod
     def __update_stock(cls, change: List, mode: str) -> None:
