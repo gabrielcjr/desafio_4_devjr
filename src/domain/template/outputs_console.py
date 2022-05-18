@@ -88,7 +88,7 @@ class InputsWarnings:
 
     @staticmethod
     def input_quantity():
-        return print("Por favor, escolha uma quantidade até 9 itens")
+        return print("Por favor, escolha uma quantidade até 99 itens")
 
     @staticmethod
     def input_keep():

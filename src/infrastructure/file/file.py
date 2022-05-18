@@ -11,7 +11,6 @@ class ProductFileReader:
     def read(self, mode: str) -> List:
         file: IO = self.open_file(mode)
         lines: list = file.readlines()
-        lines = lines[:] # 
         product = []
         for line in lines: #for ou if
             product.append(self.__convert_to_product(line))
@@ -31,7 +30,6 @@ class ProductFileReader:
     def open_file(mode: str) -> IO:
         return open(f"{ProductFileReader.BASE_PATH}/_store_file.txt", mode)
 
-
     @staticmethod
     def load_lines() -> None:
         file: IO = ProductFileReader.open_file("r")
@@ -41,16 +39,19 @@ class ProductFileReader:
 
 class ProductFileWriter():
     @staticmethod
-    def save_product_stock(product: int, stock: int) -> None:
+    def write_product_file(product: int, new_value: int, field_to_change: int) -> None:
         lines: list = ProductFileReader.load_lines()
         line: str = lines[product - 1]
-        semicolon_pos_max = line.rfind(";") - 2
-        new_line = line[:semicolon_pos_max] + str(stock) + ";\n"
+        line_to_change: list = line.split(';')
+        for index, item in enumerate(line_to_change): 
+            if index == field_to_change:
+                line_to_change[index] = str(new_value)
+        new_line = ';'.join(line_to_change)
         lines[product - 1] = new_line
-        ProductFileWriter.__update_stock(lines, "w")
+        ProductFileWriter.__update_file(lines, "w")
 
     @classmethod
-    def __update_stock(cls, change: List, mode: str) -> None:
+    def __update_file(cls, change: List, mode: str) -> None:
         file = ProductFileReader.open_file(mode)
         file.writelines(change)
         file.close()
