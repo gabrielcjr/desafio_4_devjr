@@ -10,7 +10,6 @@ class SelectedProduct:
         stock: int = int(item_stock)
         if input_quantity <= (stock - SelectedProduct.__MINIMAL_STOCK_AVAILABILITY):
             return True
-        from domain.template.outputs_web import StockCheck
-
+        from domain.template.outputs_console import StockCheck
         StockCheck.stock_not_available()
         exit(0)
