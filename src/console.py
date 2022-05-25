@@ -17,7 +17,7 @@ def main():
 
     reader = file.ProductFileReader()
 
-    all_products = reader.read("r")
+    all_products: list = reader.read("r")
 
 
     while True:

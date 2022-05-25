@@ -31,7 +31,7 @@ class ProductFileReader:
         return open(f"{ProductFileReader.BASE_PATH}/_store_file.txt", mode)
 
     @staticmethod
-    def load_lines() -> None:
+    def load_lines() -> list:
         file: IO = ProductFileReader.open_file("r")
         lines: list = file.readlines()
         file.close()
