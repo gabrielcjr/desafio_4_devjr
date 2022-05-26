@@ -39,7 +39,7 @@ class TestInputs(unittest.TestCase):
         self.assertEqual(actual_result, 3.0)
 
     @mock.patch(
-        "infrastructure.file.file.UpdateStock.save_product_stock",
+        "infrastructure.file.file.ProductFileWriter.write_product_file",
         return_value=[
             "1;Microservices;1.0;99;\n",
             "2;Kubernetes;2.0;99;\n",

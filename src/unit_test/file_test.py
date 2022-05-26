@@ -1,46 +1,45 @@
-import pytest
-from unittest import mock
-import os
-import sys
+# import pytest
+# from unittest import mock
+# import os
+# import sys
 
-currentdir = os.path.dirname(os.path.realpath(__file__))
-parentdir = os.path.dirname(currentdir)
-sys.path.append(parentdir)
-from infrastructure.file.file import ProductFileReader, BuildProductList, ProductFileWriter
-from domain.service.collection import Collection
+# currentdir = os.path.dirname(os.path.realpath(__file__))
+# parentdir = os.path.dirname(currentdir)
+# sys.path.append(parentdir)
+# from infrastructure.file.file import ProductFileReader, ProductFileWriter
 
-BASE_PATH = os.path.abspath(os.path.dirname(__file__))
-
-
-def open_file(mode):
-    return open(BASE_PATH + "/_stock_file.txt", mode)
+# BASE_PATH = os.path.abspath(os.path.dirname(__file__))
 
 
-def open_file2(mode):
-    return open(BASE_PATH + "/_stock_file2.txt", mode)
+# def open_file(mode):
+#     return open(BASE_PATH + "/_stock_file.txt", mode)
 
 
-def read_lines():
-    file = open_file("r")
-    lines = file.readlines()
-    file.close()
-    return lines
+# def open_file2(mode):
+#     return open(BASE_PATH + "/_stock_file2.txt", mode)
 
 
-class TestFile:
-    def setup_class(self):
-        self.product_data = ["1", "Microsservices", "1.0", "99"]
-        self.product_line = "1;Microsservices;1.0;99;"
-        self.product = 1
-        self.stock = 98
-        self.lines = [
-            "1;Microsservices;1.0;98;\n",
-            "2;Kubernetes;2.0;99;\n",
-            "3;Docker;3.0;99;\n",
-            "4;Architecture;4.0;99;\n",
-            "5;Communication;5.0;99;\n",
-            "6;Observability;6.0;99;\n",
-        ]
+# def read_lines():
+#     file = open_file("r")
+#     lines = file.readlines()
+#     file.close()
+#     return lines
+
+
+# class TestFile:
+#     def setup_class(self):
+#         self.product_data = ["1", "Microsservices", "1.0", "99"]
+#         self.product_line = "1;Microsservices;1.0;99;"
+#         self.product = 1
+#         self.stock = 98
+#         self.lines = [
+#             "1;Microsservices;1.0;98;\n",
+#             "2;Kubernetes;2.0;99;\n",
+#             "3;Docker;3.0;99;\n",
+#             "4;Architecture;4.0;99;\n",
+#             "5;Communication;5.0;99;\n",
+#             "6;Observability;6.0;99;\n",
+#         ]
 
     # @mock.patch("infrastructure.file.file.File.open_file", return_value=open_file2("w"))
     # def test_update_stock(self, mock_open_file):

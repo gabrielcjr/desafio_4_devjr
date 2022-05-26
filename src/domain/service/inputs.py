@@ -20,7 +20,7 @@ class Inputs:
         quantity_input: str = ""
         while type(quantity_input) != float:
             quantity_input = input(message)
-            if re.match("\d{1,2}$", quantity_input):  # type: ignore
+            if re.match("d{1,2}$", quantity_input):  # type: ignore
                 return int(quantity_input)
             else:
                 outputs_console.InputsWarnings.input_quantity()
