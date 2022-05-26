@@ -19,7 +19,6 @@ def main():
 
     all_products: list = reader.read("r")
 
-
     while True:
 
         outputs_console.List.products_list(all_products)
@@ -37,11 +36,11 @@ def main():
         )
 
         validated_choice: Product | None = Product(
-            user_input_product, 
-            all_products[user_input_product - 1].get_name, 
-            all_products[user_input_product - 1].get_price, 
+            user_input_product,
+            all_products[user_input_product - 1].get_name,
+            all_products[user_input_product - 1].get_price,
             all_products[user_input_product - 1].get_stock
-            )
+        )
 
         new_item = Item(validated_choice, user_input_quantity)
 
